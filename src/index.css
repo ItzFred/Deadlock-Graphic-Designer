@@ -1,0 +1,573 @@
+/* Forevs Font */
+
+@font-face {
+  font-family: Forevs;
+  src: url('./fonts/Forevs/forevsdemo-medium.otf') format(woff);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Forevs;
+  src: url('./fonts/Forevs/forevsdemo-mediumitalic.otf') format(woff);
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Forevs;
+  src: url('./fonts/Forevs/forevsdemo-bold.otf') format(woff);
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Forevs;
+  src: url('./fonts/Forevs/forevsdemo-bolditalic.otf') format(woff);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Retail Font */
+
+@font-face {
+  font-family: Retail;
+  src: url('./fonts/Retail/retaildemo-medium.otf') format(woff);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Retail;
+  src: url('./fonts/Retail/retaildemo-mediumitalic.otf') format(woff);
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Retail;
+  src: url('./fonts/Retail/retaildemo-semibold.otf') format(woff);
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Retail;
+  src: url('./fonts/Retail/retaildemo-semibolditalic.otf') format(woff);
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Retail;
+  src: url('./fonts/Retail/retaildemo-bold.otf') format(woff);
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Retail;
+  src: url('./fonts/Retail/retaildemo-bolditalic.otf') format(woff);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Noto Sans*/
+@font-face {
+  font-family: NotoSans;
+  src: url('./fonts/NotoSans/notosanskr-bold.ttf') format(woff);
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: NotoSans;
+  src: url('./fonts/NotoSans/notosanskr-regular.ttf') format(woff);
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: NotoSans;
+  src: url('./fonts/NotoSans/notosanskr-light.ttf') format(woff);
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #212020;  
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  display: block;
+  padding: 0;
+  margin: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #212020;
+
+}
+
+body {
+
+  padding: 0;
+  margin: 0;
+  background-color: #212020;
+  background-size:cover;
+
+}
+
+h3{
+  font-size: 64px;
+  font-family: Forevs;
+  margin: 0px;
+}
+
+h4{
+  margin: 0;
+  padding: 0;
+  align-self: flex-end;
+}
+
+.VBox{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+
+  display: flex; 
+  flex-direction: row;
+  align-content: stretch;
+}
+
+.HBox{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+
+  display: flex; 
+  flex-direction:column;
+  align-content: stretch;
+}
+
+.workArea{
+  padding: 20px;
+  margin: 10px;
+  border-radius: 20px;
+  background-color: #1A1A1A;
+  width: 30%;
+  min-width: 400px;
+
+  height: 700px;
+
+  overflow-y: scroll;
+}
+
+.previewArea{
+  padding: 20px;
+  margin: 10px;
+  border-radius: 20px;
+  background-color: #1A1A1A;
+  width: 70%;
+
+  height: 700px;
+
+  display: flex; 
+  
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  overflow-y: scroll;
+}
+
+.logo{
+  width: 20%;
+  padding: 20px;
+}
+
+
+label{
+  font-size: 1em;
+  font-weight: 700;
+  font-family: Retail;
+  color: #efdfbf;
+}
+
+div[contenteditable]{
+  font-family: Retail;
+  font-size: 1em;
+  font-weight: 600;
+  background-color: #212020;
+  padding: 8px;
+  margin: 4px;
+  outline: none;
+
+  border-width: 1px;
+  border-color: #212020;
+  border-style:solid;
+  border-radius: 8px;
+
+  width: 90%;
+  word-wrap:break-word;
+  text-overflow: clip;
+  overflow-y: scroll;
+  overflow: auto;
+
+  transition: border-color 0.2s ease-in-out;
+}
+div[contenteditable]:hover{
+  border-width: 1px;
+  border-color: #efdfbf;
+}
+div[contenteditable]:focus{
+  border-width: 1px;
+  border-color: #efdfbf;
+}
+
+button{
+  width: 100%;
+  
+  padding: 8px;
+  margin: 4px;
+  outline: none;
+
+  border-width: 1px;
+  border-color: #212020;
+  border-style:solid;
+  border-radius: 8px;
+  
+  font-family: Retail;
+  font-size: 1em;
+  font-weight: 600;
+  color: #efdfbf;
+  background-color: #212020;
+
+  justify-content: center;
+  align-items: center;
+
+  transition: border-color 0.2s ease-in-out;
+
+}
+button:hover{
+  border-color: #efdfbf;
+}
+button:focus{
+  border-color: #efdfbf;
+  background-color: #efdfbf;
+  color: #212020; 
+}
+
+input::file-selector-button{
+  width: 25%;
+  
+  padding: 4px;
+  margin: 2px;
+  outline: none;
+
+  border-width: 1px;
+  border-color: #efdfbf;
+  border-style:solid;
+  border-radius: 8px;
+  
+  font-family: Retail;
+  font-size: 1em;
+  font-weight: 600;
+  color: #efdfbf;
+  background-color: #212020;
+
+  justify-content: center;
+  align-items: center;
+
+  transition: border-color 0.2s ease-in-out;
+}
+input::file-selector-button:focus{
+  background-color: #efdfbf;
+  color: #212020; 
+}
+
+input{
+  margin: 8px;
+  padding: 8px;
+
+  background-color: #212020;
+
+  outline: none;
+
+  font-family: Retail;
+  font-size: 1em;
+  font-weight: 600;
+  color: #efdfbf;
+
+  border-width: 1px;
+  border-color: #212020;
+  border-style:solid;
+  border-radius: 8px;
+
+  pointer-events: all;
+}
+
+input[type=color]{
+  height: 50px;
+}
+
+textarea{
+  margin: 8px;
+  padding: 8px;
+
+  width:92%;
+
+  background-color: #212020;
+
+  outline: none;
+
+  font-family: Retail;
+  font-size: 1em;
+  font-weight: 600;
+  color: #efdfbf;
+
+  border-width: 1px;
+  border-color: #212020;
+  border-style:solid;
+  border-radius: 8px;
+
+  pointer-events: all;
+  resize:none;
+  overflow: visible;
+}
+
+select{
+  
+  align-self: center;
+  
+  padding: 8px;
+  margin: 4px;
+  outline: none;
+
+  border-width: 1px;
+  border-color: #212020;
+  border-style:solid;
+  border-radius: 8px;
+  
+  font-family: Retail;
+  font-size: 1em;
+  font-weight: 600;
+  text-align: center;
+  color: #efdfbf;
+  background-color: #1A1A1A;
+
+  justify-content: center;
+  align-items: center;
+
+  transition: border-color 0.2s ease-in-out;
+
+}
+select:hover{
+  border-color: #efdfbf;
+}
+select:focus{
+  border-color: #efdfbf;
+  background-color: #efdfbf;
+  color: #212020; 
+}
+
+option{
+  background-color: #212020;
+  border-color: #212020;
+  
+  padding: 0;
+
+  font-size: 24;
+  font-weight: 700;
+  font-family: Forevs;
+
+  text-align: center;
+  color: #efdfbf;
+
+}
+
+div.topPartDiv{
+
+  margin: 12px;
+  margin-bottom: 0px;
+  padding: 8px;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
+  border-radius: 8px;
+  background-color: #212020;
+
+  color: #efdfbf; 
+  font-size: 26px;
+  font-family: Forevs;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
+  justify-content: flex-end;
+
+  border-bottom-left-radius: 8px; 
+  border-bottom-right-radius: 8px;
+
+  transition: border-color 0.2s ease-in-out;
+  animation-duration: 0.2s;
+  animation-name: CloseTopDiv;
+
+  position: relative;
+  z-index: 10;
+
+}
+div.topPartDiv:hover{
+  border-color: #efdfbf;
+}
+@keyframes OpenTopDiv{
+  from {background-color: #212020; color: #efdfbf;  border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;}
+  to {background-color: #efdfbf; color: #212020; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;}
+}
+@keyframes CloseTopDiv{
+  from {background-color: #efdfbf; color: #212020; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;}
+  to {background-color: #212020;  color: #efdfbf; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;}
+}
+
+div.bottomPartDiv{
+
+  margin: 12px;
+  margin-top: -20px;
+  margin-bottom: 24px;
+
+  padding: 12px;
+  padding-top: 0px;
+
+
+  max-height: 0px;
+
+  overflow: hidden;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
+  flex-direction: column;
+
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+
+  border-color: #efdfbf;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+
+  pointer-events:none;
+
+  animation-duration: 0.4s;
+  animation-name: CloseBottomDiv;
+
+  position: relative;
+  z-index: 0;
+}
+@keyframes OpenBottomDiv{
+  from {max-height: 0px; padding-top: 0px;}
+  to {max-height: 100%; padding-top: 24px;}
+}
+
+@keyframes CloseBottomDiv{
+  from {max-height: 100%; padding-top: 24px;}
+  to {max-height: 0px; padding-top: 0px;}
+}
+
+.topDivArrow {
+
+	width: 0;
+	height: 0;
+	border-top: 15px solid transparent;
+	border-left: 30px solid #efdfbf;
+	border-bottom: 15px solid transparent;
+
+  margin-left: 20px;
+
+  align-self: center;
+
+  transform: rotate(0deg);
+  animation-name: CloseArrow;
+  animation-duration: 0.2s;
+
+  scale: 0.6;
+  cursor:pointer;
+  
+}
+@keyframes OpenArrow{
+  from {transform: rotate(0deg);}
+  to {transform: rotate(90deg);}
+}
+
+@keyframes CloseArrow{
+  from {transform: rotate(90deg);}
+  to {transform: rotate(0deg);}
+}
+
+.DivArrowUp{
+  width: 0;
+	height: 0;
+	border-top: 15px solid transparent;
+	border-left: 30px solid #efdfbf;
+	border-bottom: 15px solid transparent;
+
+  margin-left: 20px;
+
+  align-self: center;
+
+  transform: rotate(90deg);
+
+  scale: 0.6;
+  cursor:pointer;
+}
+
+.DivArrowDown{
+  width: 0;
+	height: 0;
+	border-top: 15px solid transparent;
+	border-left: 30px solid #efdfbf;
+	border-bottom: 15px solid transparent;
+
+  margin-left: 20px;
+
+  align-self: center;
+
+  transform: rotate(-90deg);
+
+  scale: 0.6;
+  cursor:pointer;
+}
+
+.topDivX {
+
+  margin-left: 20px;
+
+  font-family: Retail;
+  font-style: normal;
+  font-weight: bold;
+
+  align-self: center;
+  
+  cursor:pointer;
+}
+
+.NoHighlight{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+

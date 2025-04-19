@@ -1,0 +1,39 @@
+div.ComponentList{
+    border: 1px solid #efdfbf;
+
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    padding: 8px;
+    margin: 8px;
+    margin-top: 0px;
+}
+
+div.ComponentListTopBar{
+    border: 1px solid #efdfbf;
+    background-color: #efdfbf;
+
+    padding: 8px;
+    margin: 8px;
+    margin-bottom: 0px;
+
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    font-family: Retail;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.ComponentListToolbarButton{
+    font-family: Retail;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+
+    padding: 0px;
+
+    width: 20%;
+    
+    -webkit-text-stroke: 2px;
+}
