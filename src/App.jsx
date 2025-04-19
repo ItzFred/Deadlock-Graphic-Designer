@@ -12,7 +12,6 @@ import { domToPng } from 'modern-screenshot'
 import { saveAs } from 'file-saver'
 import InfoOverlay from './InfoOverlay.jsx'
 import LoadPanel from './LoadPanel.jsx'
-import IconSelectorMenu from './IconSelectorMenu.jsx'
 
 function App() {
 
@@ -193,7 +192,6 @@ function App() {
         </div>
         <InfoOverlay/>
         <LoadPanel/>
-        <IconSelectorMenu/>
       </div>  
     </>
   )
