@@ -1,7 +1,7 @@
 {
   "name": "deadlockitemgenerator",
   "private": false,
-  "homepage": "https://itzfred.github.io/Deadlock-Graphic-Designer",
+  "homepage": "./",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
