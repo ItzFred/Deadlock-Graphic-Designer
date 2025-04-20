@@ -35,12 +35,12 @@ function LoadPanel(){
             comps.push(
                 <div className="loadPanelButton" onClick={elem => {EditItem(e); elem.stopPropagation()}} style={{
                     backgroundColor: color == undefined? ColorPalette.GetColor("TitlePanel", "Weapon") : 
-                        ColorPalette.GetColor("TitlePanel", color, color == "Custom"? JSON.parse(localStorage.getItem(e))["CustomColor"] : null),
+                        ColorPalette.GetColor("TitlePanel", color, color == "Custom"? JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff"  : null),
                 }}>
                     <h3 className="loadPanelButtonText" style={{
                         color: ColorPalette.GetColor("TitleText"),
                         textShadow:"2pt 2pt 0pt "+ (color == undefined? ColorPalette.GetColor("TitleShadowText", "Weapon") : 
-                        ColorPalette.GetColor("TitleShadowText", color, color == "Custom"? JSON.parse(localStorage.getItem(e))["CustomColor"] : null))
+                        ColorPalette.GetColor("TitleShadowText", color, color == "Custom"? JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff" : null))
                     }} dangerouslySetInnerHTML={Utils.markdown(JSON.parse(localStorage.getItem(e))["ItemName"])}/>
                     <RemoveButton item={e} col={color} customColor={JSON.parse(localStorage.getItem(e))["CustomColor"]}/>
                 </div>

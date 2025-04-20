@@ -484,52 +484,43 @@ function ItemComponent(values){
 
             function SetCellComps(){
                 var dict = Utils.GetCurrentItemDict()["ItemComponent_"+values.index]
-                if (dict["StatTableCell"] !== undefined){                 
+                if (dict["StatTableCell"] !== undefined){  
 
                     var cells = []
                     var vals = Object.values(dict["StatTableCell"])
+
+                    var scalingpresent = false    
+                    for(var i = 0; i < vals.length; i++){
+                        if (vals[i][10] != "None" && vals[i][10] != undefined && vals[i][10] != null){
+                            scalingpresent = true
+                        }
+                    }           
+
                     for(var i = 0; i < vals.length; i++){
                         if (vals[i][0] == "Cell" || vals[i][0] == undefined){
                             cells.push(
                                 <div style={{
-                                    backgroundColor:ColorPalette.GetColor("StatTablePanel"),
-                                    height:"auto",
-                                    minHeight:"70px",
-                                    borderRadius:"3pt",
-                                    borderTopLeftRadius: i > 0 || Object.values(ItemComponents)[values.placement - 1] == "StatTableRow" ? "0pt" : "3pt",
-                                    borderBottomLeftRadius: i > 0 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
-                                    borderTopRightRadius: i < vals.length - 1 || Object.values(ItemComponents)[values.placement - 1] == "StatTableRow"? "0pt" : "3pt",
-                                    borderBottomRightRadius: i < vals.length - 1 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
-                                    marginLeft: i == 0? "12.5pt" : "2pt",
-                                    marginRight: i == vals.length - 1? "12.5pt" : "2pt",   
-                                    paddingLeft:"5px",
-                                    paddingRight:"5px",
                                     flexGrow: vals[i][2] != undefined? vals[i][2] : 1,
                                     display:"flex",
                                     flexDirection:"column",
                                     justifyContent:"center",
                                     flexShrink:"1",
                                     flexBasis:"0",
-                                    borderStyle: vals[i][10] == "None"? "none" : "solid",
-                                    borderColor: vals[i][10] == "None"? "none" : ColorPalette.GetScalingColor(vals[i][10],vals[i][12],1, false),
-                                    borderWidth: vals[i][10] == "None"? "0px" : "3px",
-                                    backgroundImage: vals[i][10] == "None"? "none" : "radial-gradient("+ColorPalette.GetColor("StatTablePanel")+" 50%,"+ColorPalette.GetScalingColor(vals[i][10],vals[i][12],0.4)+")",
+                                    height:"auto",
                                 }}>
                                     {vals[i][10] != "None" && vals[i][10] != undefined && vals[i][10] != null? <div style={{
                                         height:"20px",
-                                        marginBottom: vals.length < 2? "-20px" : "-5px",
                                         alignSelf:"flex-end",
-                                        left:"8px",
-                                        bottom:"15%",
-                                        backgroundColor:ColorPalette.GetScalingColor(vals[i][10],vals[i][12],1, true),
-                                        position:"relative",    
-                                        paddingRight:"5px",                                                       
+                                        position:"relative",
+                                        right: i == vals.length - 1? "17px" : "3px",
+                                        top: "3px",
+                                        paddingRight:"5px",
+                                        backgroundColor:ColorPalette.GetScalingColor(vals[i][10],vals[i][12],1, true),                                                         
                                     }}>
                                         {Utils.GetScalingIcon(vals[i][10])}
                                         <h3 style={{
                                             fontSize:"15px",
-                                            color: "#d0d0d0",
-                                            height:"auto",
+                                            color: "#d0d0d0",                                           
                                             top: "-28px",
                                             position:"relative",
                                             fontFamily:"Retail",
@@ -539,53 +530,79 @@ function ItemComponent(values){
                                             marginLeft:"12px",
                                         }} dangerouslySetInnerHTML={Utils.markdown((vals[i][13] != null && vals[i][13] != undefined)? vals[i][13].toString() : "")}></h3> 
                                     </div> : ""}
-                                    <div style={{display:"flex", justifyContent:"center"}}>
-                                        {(vals[i][3] != null && vals[i][3] != undefined && vals[i][3] != "" && checkState != false) ? <img src={vals[i][3]} crossOrigin="anonymous" onError={(e)=>{e.target.src=null; SetCheckState(false)}} style={{
-                                        width:"17px", 
-                                        height:"17px",
-                                        marginRight:"4px",
-                                        alignSelf:"center",
-                                        filter:ColorPalette.GetIconColor(vals[i][4])}}/> : ""}
+                                    <div style={{
+                                        backgroundColor:ColorPalette.GetColor("StatTablePanel"),
+                                        height:"auto",
+                                        minHeight:"70px",
+                                        borderRadius:"3pt",
+                                        borderTopLeftRadius: i > 0 || Object.values(ItemComponents)[values.placement - 1] == "StatTableRow" ? "0pt" : "3pt",
+                                        borderBottomLeftRadius: i > 0 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
+                                        borderTopRightRadius: i < vals.length - 1 || Object.values(ItemComponents)[values.placement - 1] == "StatTableRow"? "0pt" : "3pt",
+                                        borderBottomRightRadius: i < vals.length - 1 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
+                                        marginLeft: i == 0? "12.5pt" : "2pt",
+                                        marginRight: i == vals.length - 1? "12.5pt" : "2pt",   
+                                        marginTop: (vals[i][10] == "None" || vals[i][10] == undefined || vals[i][10] == null) && scalingpresent? "20px" : "0px",
+                                        paddingLeft:"5px",
+                                        paddingRight:"5px",
+                                        flexGrow: vals[i][2] != undefined? vals[i][2] : 1,
+                                        display:"flex",
+                                        flexDirection:"column",
+                                        justifyContent:"center",
+                                        flexShrink:"1",
+                                        flexBasis:"0",
+                                        borderStyle: vals[i][10] == "None"? "none" : "solid",
+                                        borderColor: vals[i][10] == "None"? "none" : ColorPalette.GetScalingColor(vals[i][10],vals[i][12],1, false),
+                                        borderWidth: vals[i][10] == "None"? "0px" : "3px",
+                                        backgroundImage: vals[i][10] == "None"? "none" : "radial-gradient("+ColorPalette.GetColor("StatTablePanel")+" 50%,"+ColorPalette.GetScalingColor(vals[i][10],vals[i][12],0.4)+")",
+                                    }}>
+                                        <div style={{display:"flex", justifyContent:"center"}}>
+                                            {(vals[i][3] != null && vals[i][3] != undefined && vals[i][3] != "" && checkState != false) ? <img src={vals[i][3]} crossOrigin="anonymous" onError={(e)=>{e.target.src=null; SetCheckState(false)}} style={{
+                                            width:"17px", 
+                                            height:"17px",
+                                            marginRight:"4px",
+                                            alignSelf:"center",
+                                            filter:ColorPalette.GetIconColor(vals[i][4])}}/> : ""}
+                                            <h3 style=
+                                            {{
+                                                fontSize:"20px",
+                                                alignSelf:"center",
+                                                color: ColorPalette.GetColor("Text"),
+                                                height:"auto",
+                                                fontFamily:"Retail",
+                                                fontWeight:"600",                          
+                                                lineHeight: "20px"
+                                            }} dangerouslySetInnerHTML={Utils.markdown((vals[i][5] != null && vals[i][5] != undefined)? vals[i][5].toString() : "")}></h3> 
+                                        </div>
                                         <h3 style=
                                         {{
-                                            fontSize:"20px",
+                                            fontSize:"15px",
                                             alignSelf:"center",
                                             color: ColorPalette.GetColor("Text"),
                                             height:"auto",
                                             fontFamily:"Retail",
-                                            fontWeight:"600",                          
-                                            lineHeight: "20px"
-                                        }} dangerouslySetInnerHTML={Utils.markdown((vals[i][5] != null && vals[i][5] != undefined)? vals[i][5].toString() : "")}></h3> 
+                                            fontWeight:"600",
+                                            marginTop:"4.75px",
+                                            textAlign:"center",
+                                            lineHeight: "16px",
+                                            marginLeft: "5px",
+                                            marginRight: "5px",
+                                        }} dangerouslySetInnerHTML={Utils.markdown((vals[i][6] != null && vals[i][6] != undefined)? vals[i][6].toString() : "")}></h3> 
+                                        <h3 style=
+                                        {{
+                                            fontSize:"15px",
+                                            color: ColorPalette.GetColor("Text"),
+                                            height:"auto",
+                                            fontFamily:"Retail",
+                                            fontWeight:"600",
+                                            lineHeight: "22px",
+                                            marginLeft: "5px",
+                                            marginRight: "5px",
+                                            textAlign:"center",
+                                            opacity: vals[i][7] == "Conditional"? 0.7 : 1.0
+                                        }} dangerouslySetInnerHTML={
+                                            vals[i][7] == "Custom"? Utils.markdown((vals[i][8] != null && vals[i][8] != undefined)? vals[i][8].toString() : "") : 
+                                            vals[i][7] == "Conditional"? Utils.markdown("__Conditional__") : Utils.markdown("")}></h3> 
                                     </div>
-                                    <h3 style=
-                                    {{
-                                        fontSize:"15px",
-                                        alignSelf:"center",
-                                        color: ColorPalette.GetColor("Text"),
-                                        height:"auto",
-                                        fontFamily:"Retail",
-                                        fontWeight:"600",
-                                        marginTop:"4.75px",
-                                        textAlign:"center",
-                                        lineHeight: "16px",
-                                        marginLeft: "5px",
-                                        marginRight: "5px",
-                                    }} dangerouslySetInnerHTML={Utils.markdown((vals[i][6] != null && vals[i][6] != undefined)? vals[i][6].toString() : "")}></h3> 
-                                    <h3 style=
-                                    {{
-                                        fontSize:"15px",
-                                        color: ColorPalette.GetColor("Text"),
-                                        height:"auto",
-                                        fontFamily:"Retail",
-                                        fontWeight:"600",
-                                        lineHeight: "22px",
-                                        marginLeft: "5px",
-                                        marginRight: "5px",
-                                        textAlign:"center",
-                                        opacity: vals[i][7] == "Conditional"? 0.7 : 1.0
-                                    }} dangerouslySetInnerHTML={
-                                        vals[i][7] == "Custom"? Utils.markdown((vals[i][8] != null && vals[i][8] != undefined)? vals[i][8].toString() : "") : 
-                                        vals[i][7] == "Conditional"? Utils.markdown("__Conditional__") : Utils.markdown("")}></h3> 
                                 </div>
                             )
                         }
