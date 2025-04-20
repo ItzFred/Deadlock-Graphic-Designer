@@ -34,6 +34,13 @@ function App() {
 
     if (localStorage.getItem("SelectedItemComponent") === null) localStorage.setItem("SelectedItemComponent", "Title")
     if (Utils.GetCurrentItemDict()["ColorPalette"] === undefined) Utils.SetCurrentItemDictKey("ColorPalette", "Weapon")
+    if (Utils.GetCurrentItemDict()["ItemName"] === undefined) {
+      Utils.SetCurrentItemDictKey("ItemName", "Item")
+      var input = document.getElementById("ItemNameInput")
+      input.value = "Item"
+    }
+    if (localStorage.getItem("Items") == null || localStorage.getItem("Items") == undefined) localStorage.setItem("Items", '['+JSON.stringify(localStorage.getItem("CurrentItem"))+']')
+
 
     window.addEventListener("itemComponent", setEffectComponents);
     return () => {
@@ -68,16 +75,20 @@ function App() {
 
     if (Utils.GetCurrentItemDict() === null){
       var items = JSON.parse(localStorage.getItem("itemComponents"))
-      var currentItem = {"ItemName" : (saveData == "" || saveData == undefined )? "" : saveData.target.value}
-      Utils.SetCurrentItemDict(currentItem)
+      if (saveData != "" && saveData != undefined && saveData != null){
+        var currentItem = {"ItemName" : saveData.target.value}
+        Utils.SetCurrentItemDict(currentItem)
+      }
     }
     else{
       var items = Utils.GetCurrentItemDict()
-      items["ItemName"] = (saveData == "" || saveData == undefined )? "" : saveData.target.value
-      Utils.SetCurrentItemDict(items)
+      if (saveData != "" && saveData != undefined && saveData != null){
+        items["ItemName"] = saveData.target.value
+        Utils.SetCurrentItemDict(items)
+      }
     }
 
-    if (localStorage.getItem("Items") == null) localStorage.setItem("Items", '['+JSON.stringify(localStorage.getItem("CurrentItem"))+']')
+    if (localStorage.getItem("Items") == null || localStorage.getItem("Items") == undefined) localStorage.setItem("Items", '['+JSON.stringify(localStorage.getItem("CurrentItem"))+']')
     else {
       var items = JSON.parse(localStorage.getItem("Items"))
       var currentItem = localStorage.getItem("CurrentItem")
@@ -106,15 +117,17 @@ function App() {
         var reader = new FileReader()
         reader.readAsText(file, "UTF-8")
         reader.onload = evt => {
-          Utils.SetCurrentItemDict(JSON.parse(evt.target.result))
+          var newCurrentItem = crypto.randomUUID()
+          localStorage.setItem("CurrentItem", newCurrentItem)
+          localStorage.setItem(newCurrentItem, evt.target.result)
+
           SetItemName(Utils.GetCurrentItemDict()["ItemName"] ?? "")
           window.dispatchEvent(new Event("itemComponent"));
 
-          if (localStorage.getItem("Items") == null) localStorage.setItem("Items", '['+JSON.stringify(localStorage.getItem("CurrentItem"))+']')
+          if (localStorage.getItem("Items") == null) localStorage.setItem("Items", '['+JSON.stringify(newCurrentItem)+']')
           else {
             var items = JSON.parse(localStorage.getItem("Items"))
-            var currentItem = localStorage.getItem("CurrentItem")
-            if (!items.includes(currentItem)) items.push(currentItem)
+            if (!items.includes(newCurrentItem)) items.push(newCurrentItem)
             localStorage.setItem("Items", JSON.stringify(items))
           }
         }
@@ -129,7 +142,7 @@ function App() {
   function CreateNewitem(){
     localStorage.setItem("CurrentItem", crypto.randomUUID())
     SetComponents({})
-    SetItemName("")
+
     components = []
     previewComponents = []
     window.dispatchEvent(new Event("itemComponent"));
@@ -167,7 +180,6 @@ function App() {
                   <option value="Description">Description</option>
                   <option value="StatTableRow">Stat Table Row</option>
                   <option value="ComponentOf">Component Of</option>
-                  <option value="AdjustmentDetails">Adjustment Details</option>
                 </select>
               </form>
             </div>

@@ -581,6 +581,7 @@ function ItemComponent(values){
                                         lineHeight: "22px",
                                         marginLeft: "5px",
                                         marginRight: "5px",
+                                        textAlign:"center",
                                         opacity: vals[i][7] == "Conditional"? 0.7 : 1.0
                                     }} dangerouslySetInnerHTML={
                                         vals[i][7] == "Custom"? Utils.markdown((vals[i][8] != null && vals[i][8] != undefined)? vals[i][8].toString() : "") : 

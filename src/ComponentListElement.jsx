@@ -98,9 +98,9 @@ function ComponentListElement(values){
                         </select> </label>
                         {defaultvar == "List"?                                     
                             <>
-                            <label><br/>Stat List: <textarea name="StatList" wrap="soft" rows={6} defaultValue={dict[values.path]["A"+values.place][1]} style={{pointerEvents:"auto"}}/></label>
-                            <label>Cell Width: <input name="CellWidth" type="number" min={0} defaultValue={dict[values.path]["A"+values.place][2]}/></label>
-                            <label>Columns: <input name="Columns" type="number" min={1} max={3} defaultValue={dict[values.path]["A"+values.place][9]}/></label>
+                            <label><br/>Stat List: <textarea name="StatList" wrap="soft" rows={6} defaultValue={dict[values.path]["A"+values.place][1]} style={{pointerEvents:"auto"}}/></label><br/>
+                            <label>Cell Width: <input name="CellWidth" type="number" min={0} defaultValue={dict[values.path]["A"+values.place][2]}/></label><br/>
+                            <label>Columns: <input name="Columns" type="number" min={1} max={3} defaultValue={dict[values.path]["A"+values.place][9]}/></label><br/>
                             </>
                         :
                             <>
@@ -116,16 +116,16 @@ function ComponentListElement(values){
                                     <option value="Gray">Gray</option>
                                     <option value="Soul">Soul</option>
                                 </select> </label>
-                            <label><br/>Top Text: <input name="TopText" defaultValue={dict[values.path]["A"+values.place][5]}/></label>
-                            <label>Middle Text: <input name="MiddleText" defaultValue={dict[values.path]["A"+values.place][6]}/></label>
+                            <label><br/>Top Text: <input name="TopText" defaultValue={dict[values.path]["A"+values.place][5]}/></label><br/>
+                            <label>Middle Text: <input name="MiddleText" defaultValue={dict[values.path]["A"+values.place][6]}/></label><br/>
                             <label>Bottom Text:
                                 <select name="BottomText" defaultValue={dict[values.path]["A"+values.place][7]} style={{pointerEvents:"auto"}}>
                                     <option value="None">None</option>
                                     <option value="Conditional">Conditional</option>
                                     <option value="Custom">Custom</option>
-                                </select> </label>
+                                </select> </label><br/>
                             {dict[values.path]["A"+values.place][7] == "Custom"? <label><br/>Custom Bottom Text: <input name="CustomBottomText" defaultValue={dict[values.path]["A"+values.place][8]}/></label> : ""}
-                            <label><br/>Cell Width: <input name="CellWidth" type="number" min={1} defaultValue={dict[values.path]["A"+values.place][2]}/></label>
+                            <label><br/>Cell Width: <input name="CellWidth" type="number" min={1} defaultValue={dict[values.path]["A"+values.place][2]}/></label><br/>
                             <label>Scaling Type:
                                 <select name="ScalingType" defaultValue={dict[values.path]["A"+values.place][10]} style={{pointerEvents:"auto"}}>
                                     <option value="None">None</option>

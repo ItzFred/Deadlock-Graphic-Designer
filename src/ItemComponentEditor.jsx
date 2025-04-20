@@ -170,7 +170,7 @@ function ItemComponentEditor(values){
     
     function MoveElement(element,direction){
         setParts()
-        var dict = Utils.GetCurrentItemDict["itemComponents"]
+        var dict = Utils.GetCurrentItemDict()["itemComponents"]
         var newdict = {}
 
         var index = 0
@@ -195,7 +195,7 @@ function ItemComponentEditor(values){
             newdict[keys[i]] = dict[keys[i]]
         }
 
-        Utils.SetCurrentItemDictKey("itemComponents", JSON.stringify(newdict))
+        Utils.SetCurrentItemDictKey("itemComponents", newdict)
 
         window.dispatchEvent(new Event("ItemComponentEditorInputSent_"+values.index));
         window.dispatchEvent(new Event("itemComponent"));
