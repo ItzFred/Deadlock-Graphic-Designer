@@ -94,11 +94,11 @@ function ItemComponent(values){
                             width:"11.5px",
                             paddingLeft: "12pt",
                             paddingTop:"2.5pt",
-                            filter: "invert(97%) sepia(7%) saturate(758%) hue-rotate(77deg) brightness(95%) contrast(84%)",
+                            filter: ColorPalette.IconColors.Soul,
                         }}/>
                         <h3 style=
                         {{
-                            color:"#c1e0d0", 
+                            color:"#9affd6", 
                             fontSize:"19px",
                             fontFamily:"Retail",
                             paddingLeft: "3.6pt",
@@ -279,17 +279,17 @@ function ItemComponent(values){
                     }}> 
                     <h3 style={{
                         fontSize:"18px",
-                        color: cooldownType != "Passive" ? cooldownType == "Active" ? "#ffffff": ColorPalette.GetColor("Text") : ColorPalette.GetColor("PassiveText"),
+                        color: cooldownType != "Passive" ? cooldownType == "Active" ? "#ffffff" : cooldownType == null? ColorPalette.GetColor("PassiveText") : ColorPalette.GetColor("Text") : ColorPalette.GetColor("PassiveText"),
                         fontFamily:"Retail",
                         fontWeight: cooldownType == "Active" ? "700" : "600",
-                        fontStyle: cooldownType != "Passive" ? "normal" : "italic",
+                        fontStyle: cooldownType != "Passive"? cooldownType == null? "italic" : "normal" : "italic",
                         paddingTop:"2.5pt",
                         paddingBottom:"4.5pt",
                         paddingLeft:"14pt",
                     }} dangerouslySetInnerHTML={
                         Utils.markdown(cooldownType == "Custom"? 
-                        cooldownCustomText == undefined? "" : cooldownCustomText.toString() : 
-                        (cooldownType == undefined || cooldownType == null) ? "" : cooldownType.toString())}></h3>
+                        cooldownCustomText == undefined? "Passive" : cooldownCustomText.toString() : 
+                        (cooldownType == undefined || cooldownType == null) ? "Passive" : cooldownType.toString())}></h3>
                     </div>
 
                     <div style={{
@@ -491,7 +491,7 @@ function ItemComponent(values){
 
                     var scalingpresent = false    
                     for(var i = 0; i < vals.length; i++){
-                        if (vals[i][10] != "None" && vals[i][10] != undefined && vals[i][10] != null){
+                        if (vals[i][10] != "None" && vals[i][10] != undefined && vals[i][10] != null && (vals[i][0] == "Cell" || vals[i][0] == undefined)){
                             scalingpresent = true
                         }
                     }           
@@ -517,7 +517,7 @@ function ItemComponent(values){
                                         paddingRight:"5px",
                                         backgroundColor:ColorPalette.GetScalingColor(vals[i][10],vals[i][12],1, true),                                                         
                                     }}>
-                                        {Utils.GetScalingIcon(vals[i][10])}
+                                        {Utils.GetScalingIcon(vals[i][10]) == ""? <img src={vals[i][11]} style={{width:"42px", position:"relative", left:"-31px", top:"-5px"}}/> : Utils.GetScalingIcon(vals[i][10])}
                                         <h3 style={{
                                             fontSize:"15px",
                                             color: "#d0d0d0",                                           
@@ -620,6 +620,7 @@ function ItemComponent(values){
                                     borderBottomRightRadius: i < vals.length - 1 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
                                     marginLeft: i == 0? "12.5pt" : "2pt",
                                     marginRight: i == vals.length - 1? "12.5pt" : "2pt",
+                                    marginTop: (vals[i][10] == "None" || vals[i][10] == undefined || vals[i][10] == null) && scalingpresent? "20px" : "0px",
                                     display:"flex",
                                     flexGrow: vals[i][2] != undefined? vals[i][2] : 1,
                                     flexShrink: 1,

@@ -266,6 +266,37 @@ button:focus{
   color: #212020; 
 }
 
+.DarkButton{ 
+  padding: 8px;
+  margin: 4px;
+  outline: none;
+
+  border-width: 1px;
+  border-color: #1A1A1A;
+  border-style:solid;
+  border-radius: 8px;
+  
+  font-family: Retail;
+  font-size: 1em;
+  font-weight: 600;
+  color: #efdfbf;
+  background-color: #1A1A1A;
+
+  justify-content: center;
+  align-items: center;
+
+  transition: border-color 0.2s ease-in-out;
+
+}
+.DarkButton:hover{
+  border-color: #efdfbf;
+}
+.DarkButton:focus{
+  border-color: #efdfbf;
+  background-color: #efdfbf;
+  color: #1A1A1A; 
+}
+
 input::file-selector-button{
   width: 25%;
   

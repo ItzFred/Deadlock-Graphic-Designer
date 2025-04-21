@@ -115,6 +115,8 @@ function ComponentListElement(values){
                                     <option value="Spirit">Spirit</option>
                                     <option value="Gray">Gray</option>
                                     <option value="Soul">Soul</option>
+                                    <option value="Red">Red</option>
+                                    <option value="Yellow">Yellow</option>
                                 </select> </label>
                             <label><br/>Top Text: <input name="TopText" defaultValue={dict[values.path]["A"+values.place][5]}/></label><br/>
                             <label>Middle Text: <input name="MiddleText" defaultValue={dict[values.path]["A"+values.place][6]}/></label><br/>
@@ -135,7 +137,7 @@ function ComponentListElement(values){
                                     <option value="Health">Health</option>
                                     <option value="Custom">Custom</option>
                             </select> </label>
-                            <div style={{display:dict[values.path]["A"+values.place][10] == "Custom"? "flex" : "none"}}>
+                            <div style={{display:dict[values.path]["A"+values.place][10] == "Custom"? "block" : "none", flexDirection:"row"}}>
                                 <label>Icon: <input name="CustomScalingIcon" type="file"/></label>
                                 <label>Color: <input name="CustomScalingColor" type="color" defaultValue={dict[values.path]["A"+values.place][12]}/></label>
                             </div>

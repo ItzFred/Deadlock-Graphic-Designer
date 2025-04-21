@@ -149,6 +149,24 @@ function App() {
     SaveItem("")
   }
 
+  function CopyItem(){
+    var itemData = Utils.GetCurrentItemDict()
+
+    var newCurrentItem = crypto.randomUUID()
+    localStorage.setItem("CurrentItem", newCurrentItem)
+    localStorage.setItem(newCurrentItem, JSON.stringify(itemData))
+
+    SetItemName(itemData["ItemName"] ?? "")
+    window.dispatchEvent(new Event("itemComponent"));
+
+    if (localStorage.getItem("Items") == null) localStorage.setItem("Items", '['+JSON.stringify(newCurrentItem)+']')
+      else {
+        var items = JSON.parse(localStorage.getItem("Items"))
+        if (!items.includes(newCurrentItem)) items.push(newCurrentItem)
+        localStorage.setItem("Items", JSON.stringify(items))
+      }
+  }
+
   return (
     <>
       <div class="HBox">
@@ -160,11 +178,12 @@ function App() {
           <ColorPalettePicker/>
           <div style={{display:"flex", justifyContent:"flex-end", alignSelf:"center", textAlign:"center", height:"10%", width:"100%", padding:"20px"}}>
             <label>Item Name: <input type="text" id="ItemNameInput" defaultValue={itemName} onChange={e => {SaveItem(e); window.dispatchEvent(new Event("itemComponent"))}} style={{width:"63%", backgroundColor:"#1A1A1A"}}></input></label>
-            <button style={{width:"10%"}} onClick={ImportJSON}>Import Data</button>
-            <button style={{width:"10%"}} onClick={ExportJSON}>Export Data</button>
-            <button style={{width:"10%"}} onClick={() => window.dispatchEvent(new Event("displayLoadPanel"))}>Load</button>
-            <button style={{width:"10%"}} onClick={onButtonClick}>Save Image</button>
-            <button style={{width:"10%"}} onClick={CreateNewitem}>New Item</button>
+            <button className='DarkButton' style={{width:"7%"}} onClick={ImportJSON}>Import Data</button>
+            <button className='DarkButton' style={{width:"7%"}} onClick={ExportJSON}>Export Data</button>
+            <button className='DarkButton' style={{width:"7%"}} onClick={() => window.dispatchEvent(new Event("displayLoadPanel"))}>Load</button>
+            <button className='DarkButton' style={{width:"7%"}} onClick={onButtonClick}>Save Image</button>
+            <button className='DarkButton' style={{width:"7%"}} onClick={CreateNewitem}>New Item</button>
+            <button className='DarkButton' style={{width:"7%"}} onClick={CopyItem}>Copy Item</button>
           </div>
         </div>
         <div class="VBox">
@@ -188,9 +207,9 @@ function App() {
           <div class="previewArea" id="previewArea">
             <div id="CaptureArea">
             {previewComponents}
-            <button style={{
+            <button className='DarkButton' style={{
               position:"absolute",
-              width:"40px",
+              width:"100px",
               height:"40px",
               borderRadius:"20px",
               zIndex:"10",
@@ -198,7 +217,7 @@ function App() {
               bottom:"20px",
               fontFamily:"NotoSans",
               fontWeight:"700",
-            }} onClick={() => window.dispatchEvent(new Event("displayInfoOverlay"))}>?</button>
+            }} onClick={() => window.dispatchEvent(new Event("displayInfoOverlay"))}>Info ?</button>
             </div>
           </div>
         </div>

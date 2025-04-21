@@ -107,12 +107,13 @@ class Utils{
             "#ec981a" : /\[(weapon),(.*?)\]/gm,
             "#00ff9a" : /\[(vitality),(.*?)\]/gm,
             "#ce91ff" : /\[(spirit),(.*?)\]/gm,
-            "#c1e0d0" : /\[(soul),(.*?)\]/gm,
+            "#9affd6" : /\[(soul),(.*?)\]/gm,
             "#ff6b6b" : /\[(red),(.*?)\]/gm,
         }    
 
         var lightColor = "#ffffff"
         var darkColor = ColorPalette.GetColor("DarkText")
+        var subtitleColor = ColorPalette.GetColor("SubtitleText")
         var symbols = /([&?=.@$%!^":;'+/\-])/gm;
 
         var newtext = ""
@@ -131,7 +132,7 @@ class Utils{
 
         newtext = newtext.replace( white, '<span style="color:'+lightColor+'">$1</span>' );
         newtext = newtext.replace( dark, '<span style="color:'+darkColor+'">$1</span>' );
-        newtext = newtext.replace( darker, '<span style="color:'+darkColor+'; opacity:0.6">$1</span>' );
+        newtext = newtext.replace( darker, '<span style="color:'+subtitleColor+';">$1</span>' );
 
 
 

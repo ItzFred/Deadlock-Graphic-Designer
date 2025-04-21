@@ -42,7 +42,7 @@ function LoadPanel(){
                         textShadow:"2pt 2pt 0pt "+ (color == undefined? ColorPalette.GetColor("TitleShadowText", "Weapon") : 
                         ColorPalette.GetColor("TitleShadowText", color, color == "Custom"? JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff" : null))
                     }} dangerouslySetInnerHTML={Utils.markdown(JSON.parse(localStorage.getItem(e))["ItemName"])}/>
-                    <RemoveButton item={e} col={color} customColor={JSON.parse(localStorage.getItem(e))["CustomColor"]}/>
+                    <RemoveButton item={e} col={color} customColor={JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff"}/>
                 </div>
             )
         });

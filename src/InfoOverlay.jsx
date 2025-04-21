@@ -60,7 +60,7 @@ function InfoOverlay(values){
                         </h3>
                         <div style={{display:"flex",}}>
                             <h3 style={{fontFamily:"Retail", fontSize:"18px", color:"#efdfbf", width:"50%"}} dangerouslySetInnerHTML={Utils.markdown(
-                                "**Bold** \\n __Italic__ \\n\\n [[White]] \\n ((Dark)) \\n {{Subtitle}} \\n\\n [#ff0000,Color] \\n [weapon,Weapon Color] \\n [vitality, Vitality Color] \\n [spirit, Spirit Color] \\n [soul, Soul Color] \\n\\n Line Break"
+                                "**Bold** \\n __Italic__ \\n\\n [[White]] \\n ((Dark)) \\n {{Subtitle}} \\n\\n [#ff0000,Color] \\n [weapon,Weapon Color] \\n [vitality, Vitality Color] \\n [spirit, Spirit Color] \\n [soul, Soul Color] \\n [red, Red Color] \\n\\n Line Break"
                             )}/>
                             <h3 style={{fontFamily:"Retail", fontSize:"18px", color:"#efdfbf", width:"50%"}}>
                                 **Bold**
@@ -73,7 +73,8 @@ function InfoOverlay(values){
                                 [weapon,Color]<br/>
                                 [vitality,Color]<br/>
                                 [spirit,Color]<br/>
-                                [soul,Color]<br/><br/>
+                                [soul,Color]<br/>
+                                [red,Color]<br/><br/>
 
                                 \n
                             </h3>

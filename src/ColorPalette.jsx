@@ -2,84 +2,87 @@ import Utils from "./Utils"
 
 class ColorPalette{
     static WeaponColors = {
-        TitleText : "#fbefd7",
-        TitleShadowText : "#b8701d",
-        Text : "#cac0b9",
-        DarkText : "#c4b49e",
+        TitleText : "#ffefd7",
+        TitleShadowText : "#b76f03",
+        Text : "#cdcdcd",
+        DarkText : "#b5a599",
+        SubtitleText : "#988169",
         PassiveText : "#c4b49e",
-        TitlePanel : "#ca7b1b",
-        TitlePanelStatTop : "#a3641a",
-        TitlePanelStatBottom : "#875516",
-        ComponentsPanel : "#9e6419",
-        ComponentsTextPanel : "#7e5215",
-        ComponentsIconPanel : "#e9981b",
-        ComponentsIcon : "#59401f",
-        PassivePanel : "#523d21",
-        DescriptionPanel : "#7f5717",
-        StatTablePanel : "#64461c",
-        ComponentsOfPanel : "#6f4c16",
-        ComponentsOfTextPanel : "#523d21",
-        ComponentsOfIconPanel : "#f9d38e",
-        ComponentsOfIcon : "#9e6419",
-        AdjustmentDetailsPanel : "#53412a",
-        AdjustmentDetailsLine : "#463828",
+        TitlePanel : "#c97a03",
+        TitlePanelStatTop : "#a36202",
+        TitlePanelStatBottom : "#885101",
+        ComponentsPanel : "#9e630c",
+        ComponentsTextPanel : "#7f4f08",
+        ComponentsIconPanel : "#ec981a",
+        ComponentsIcon : "#5e3e09",
+        PassivePanel : "#583b0e",
+        DescriptionPanel : "#80550f",
+        StatTablePanel : "#67430a",
+        ComponentsOfPanel : "#704a0c",
+        ComponentsOfTextPanel : "#5a3a08",
+        ComponentsOfIconPanel : "#ffd28e",
+        ComponentsOfIcon : "#9e630c",
+        AdjustmentDetailsPanel : "#574124",
+        AdjustmentDetailsLine : "#4c3920",
 
-        ComponentsIconStyle : "brightness(0) saturate(100%) invert(26%) sepia(26%) saturate(850%) hue-rotate(354deg) brightness(95%) contrast(99%)",
-        ComponentsOfIconStyle : "invert(36%) sepia(41%) saturate(911%) hue-rotate(354deg) brightness(103%) contrast(87%)"
+        ComponentsIconStyle : "brightness(0) invert(18%) sepia(58%) saturate(545%) hue-rotate(355deg) brightness(89%) contrast(82%)",
+        ComponentsOfIconStyle : "brightness(0) invert(32%) sepia(88%) saturate(792%) hue-rotate(8deg) brightness(101%) contrast(91%)"
     }
 
     static VitalityColors = {
-        TitleText : "#fbefd7",
-        TitleShadowText : "#628924",
-        Text : "#cccccc",
-        DarkText : "#a4b099",
-        PassiveText : "#abb49e",
-        TitlePanel : "#6b9727",
-        TitlePanelStatTop : "#567a20",
-        TitlePanelStatBottom : "#46661a",
-        ComponentsPanel : "#2a3120",
-        ComponentsTextPanel : "#1e231b",
-        ComponentsIconPanel : "#7fba26",
+        TitleText : "#ffefd7",
+        TitleShadowText : "#5b8a15",
+        Text : "#cdcdcd",
+        DarkText : "#a3af99",
+        SubtitleText : "#7c8b5f",
+        PassiveText : "#bfb79f",
+        TitlePanel : "#659818",
+        TitlePanelStatTop : "#507a11",
+        TitlePanelStatBottom : "#41650c",
+        ComponentsPanel : "#203500",
+        ComponentsTextPanel : "#182900",
+        ComponentsIconPanel : "#7cbb1e",
         ComponentsIcon : "#424845",
-        PassivePanel : "#344124",
-        DescriptionPanel : "#51721d",
-        StatTablePanel : "#425b1f",
-        ComponentsOfPanel : "#46641a",
-        ComponentsOfTextPanel : "#3a4a23",
-        ComponentsOfIconPanel : "#7fba26",
+        PassivePanel : "#354f11",
+        DescriptionPanel : "#4d7214",
+        StatTablePanel : "#3d5b0e",
+        ComponentsOfPanel : "#436310",
+        ComponentsOfTextPanel : "#334d0b",
+        ComponentsOfIconPanel : "#7cbb1e",
         ComponentsOfIcon : "#4f6740",
-        AdjustmentDetailsPanel : "#394f2b",
-        AdjustmentDetailsLine : "#334329",
+        AdjustmentDetailsPanel : "#365225",
+        AdjustmentDetailsLine : "#304821",
 
-        ComponentsIconStyle : "brightness(0) saturate(100%) invert(22%) sepia(0%) saturate(6152%) hue-rotate(205deg) brightness(95%) contrast(81%)",
-        ComponentsOfIconStyle : "invert(34%) sepia(45%) saturate(324%) hue-rotate(53deg) brightness(97%) contrast(92%)"
+        ComponentsIconStyle : "brightness(0) invert(26%) sepia(2%) saturate(1880%) hue-rotate(98deg) brightness(89%) contrast(84%)",
+        ComponentsOfIconStyle : "brightness(0) invert(35%) sepia(35%) saturate(451%) hue-rotate(53deg) brightness(94%) contrast(86%)"
     }
 
     static SpiritColors = {
-        TitleText : "#fbefd7",
-        TitleShadowText : "#79519a",
-        Text : "#c6bfcf",
-        DarkText : "#a99db6",
+        TitleText : "#ffefd7",
+        TitleShadowText : "#7e4ea4",
+        Text : "#cdcdcd",
+        DarkText : "#a99db7",
+        SubtitleText : "#897695",
         PassiveText : "#c1b2a8",
-        TitlePanel : "#815a9f",
-        TitlePanelStatTop : "#6f458f",
+        TitlePanel : "#8b56b4",
+        TitlePanelStatTop : "#704491",
         TitlePanelStatBottom : "#5c3778",
-        ComponentsPanel : "#362445",
-        ComponentsTextPanel : "#251d2c",
-        ComponentsIconPanel : "#af98c3",
-        ComponentsIcon : "#583c6f",
-        PassivePanel : "#3a2250",
+        ComponentsPanel : "#372248",
+        ComponentsTextPanel : "#2b1939",
+        ComponentsIconPanel : "#ce91ff",
+        ComponentsIcon : "#583b6f",
+        PassivePanel : "#3b2250",
         DescriptionPanel : "#623585",
-        StatTablePanel : "#4e2a6b",
-        ComponentsOfPanel : "#542d74",
+        StatTablePanel : "#4e296b",
+        ComponentsOfPanel : "#552d74",
         ComponentsOfTextPanel : "#43235d",
-        ComponentsOfIconPanel : "#d6cae1",
-        ComponentsOfIcon : "#815a9f",
+        ComponentsOfIconPanel : "#e7c9ff",
+        ComponentsOfIcon : "#8b56b4",
         AdjustmentDetailsPanel : "#44305f",
-        AdjustmentDetailsLine : "#3b2a52",
+        AdjustmentDetailsLine : "#3c2a53",
 
-        ComponentsIconStyle : "brightness(0) saturate(100%) invert(26%) sepia(17%) saturate(1555%) hue-rotate(230deg) brightness(91%) contrast(90%)",
-        ComponentsOfIconStyle : "invert(41%) sepia(11%) saturate(2096%) hue-rotate(231deg) brightness(92%) contrast(86%)"
+        ComponentsIconStyle : "brightness(0) invert(25%) sepia(18%) saturate(1736%) hue-rotate(230deg) brightness(89%) contrast(85%)",
+        ComponentsOfIconStyle : "brightness(0) invert(40%) sepia(12%) saturate(2642%) hue-rotate(231deg) brightness(96%) contrast(85%)"
     }
 
     static CustomColors = {
@@ -88,6 +91,7 @@ class ColorPalette{
         TitleShadowText : "#c0c0c0",
         Text : "#f7f3f0",
         DarkText : "#c8c0bc",
+        SubtitleText : "#868686",
         PassiveText : "#9a948e",
         TitlePanel : "#e5e5e5",
         TitlePanelStatTop : "#bfc0c0",
@@ -111,11 +115,13 @@ class ColorPalette{
     }
 
     static IconColors = {
-        Weapon : "invert(57%) sepia(81%) saturate(504%) hue-rotate(355deg) brightness(97%) contrast(87%)",
-        Vitality : "invert(73%) sepia(60%) saturate(840%) hue-rotate(94deg) brightness(101%) contrast(105%)",
-        Spirit : "invert(73%) sepia(64%) saturate(3817%) hue-rotate(217deg) brightness(105%) contrast(101%)",
-        Gray : "invert(69%) sepia(7%) saturate(468%) hue-rotate(51deg) brightness(93%) contrast(90%)",
-        Soul : "invert(91%) sepia(21%) saturate(203%) hue-rotate(95deg) brightness(93%) contrast(91%)"
+        Weapon : "invert(58%) sepia(49%) saturate(1335%) hue-rotate(356deg) brightness(107%) contrast(85%)",
+        Vitality : "invert(79%) sepia(38%) saturate(2485%) hue-rotate(95deg) brightness(102%) contrast(105%)",
+        Spirit : "invert(63%) sepia(35%) saturate(1039%) hue-rotate(216deg) brightness(100%) contrast(103%)",
+        Gray : "invert(80%) sepia(0%) saturate(1345%) hue-rotate(143deg) brightness(88%) contrast(80%)",
+        Soul : "invert(78%) sepia(30%) saturate(416%) hue-rotate(100deg) brightness(111%) contrast(101%)",
+        Red : "invert(72%) sepia(69%) saturate(4331%) hue-rotate(318deg) brightness(101%) contrast(109%)",
+        Yellow : "invert(76%) sepia(100%) saturate(3163%) hue-rotate(359deg) brightness(103%) contrast(105%)"
     }
 
     static GetIconColor(colorName){
@@ -126,10 +132,10 @@ class ColorPalette{
     static GetScalingColor(ColorName, CustomColor, opacity, Panel){
         switch (ColorName){
             case "None": return "rgba(0, 0, 0, 0)"
-            case "Spirit": if (Panel) return "rgba(124, 86, 153, "+opacity+")"; else return "rgba(124, 86, 153, "+opacity+")"
-            case "Weapon": if (Panel) return "rgba(128, 85, 15, "+opacity+")"; else return "rgba(124, 86, 153, "+opacity+")"
-            case "Melee": if (Panel) return "rgba(128, 85, 15, "+opacity+")"; else return "rgba(124, 86, 153, "+opacity+")"
-            case "Health": if (Panel) return "rgba(60, 112, 43, "+opacity+")"; else return "rgba(124, 86, 153, "+opacity+")"
+            case "Spirit": if (Panel) return "rgba(98, 53, 133, "+opacity+")"; else return "rgba(98, 53, 133, "+opacity+")"
+            case "Weapon": if (Panel) return "rgba(128, 85, 15, "+opacity+")"; else return "rgba(128, 85, 15, "+opacity+")"
+            case "Melee": if (Panel) return "rgba(128, 85, 15, "+opacity+")"; else return "rgba(128, 85, 15, "+opacity+")"
+            case "Health": if (Panel) return "rgba(60, 112, 43, "+opacity+")"; else return "rgba(60, 112, 43, "+opacity+")"
         }
         if (CustomColor == null || CustomColor == undefined) return "rgba(0, 0, 0, 0)"
         var color = Utils.hexToRgb(CustomColor)
