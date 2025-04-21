@@ -8,11 +8,14 @@ const IconSelector = (values) => {
     const [openMenu, SetOpenMenu] = useState(false)
 
     const imageFiles = {
-        "Stat Icons" : ["Stat/abilityDuration","Stat/abilityFrame","Stat/abilityRange","Stat/ammo","Stat/blankShieldPointed","Stat/blankShield","Stat/boot","Stat/bulletDamage","Stat/bulletLifesteal",
-            "Stat/bulletResist","Stat/bulletShieldAndDPS","Stat/chargeCooldown","Stat/cooldown","Stat/chevron","Stat/fireRate","Stat/healAmp","Stat/healthRegen","Stat/lightningBolt","Stat/lock",
-            "Stat/maxHealth","Stat/moveAndSprintSpeed","Stat/plus","Stat/punch","Stat/shieldPointedWithTrim","Stat/singleBullet","Stat/soul","Stat/Spinner","Stat/spiritItem",
-            "Stat/spiritLifesteal","Stat/spiritPower","Stat/spiritResist","Stat/spiritShield","Stat/stamina","Stat/stat","Stat/statWithDots","Stat/tripleBullet","Stat/vitalityItem","Stat/weaponItem",
-            "Stat/Silence","Stat/Stun","Stat/Invisible","Stat/MovementUp","Stat/MovementDown",],
+        "Stat Icons" : ["Stat/abilityDuration","Stat/abilityFrame","Stat/weaponItem","Stat/abilityRange","Stat/chevron","Stat/lightningBolt","Stat/lock","Stat/plus","Stat/bulletShieldAndDPS","Stat/punch","Stat/spiritShield",
+            "Stat/blankShieldPointed","Stat/blankShield","Stat/shieldPointedWithTrim","Stat/healAmp","Stat/bulletResist","Stat/spiritResist","Stat/WeaponShield","Stat/FlameShield","Stat/vitalityItem",
+            "Stat/boot","Stat/MovementUp","Stat/MovementDown","Stat/stamina","Stat/moveAndSprintSpeed",
+            "Stat/ChargeBolt","Stat/chargeCooldown","Stat/cooldown","Stat/maxHealth","Weapon/T4/luckyShot","Stat/healthRegen","Stat/Spinner",
+            "Stat/bulletDamage","Stat/singleBullet","Stat/tripleBullet","Stat/fireRate","Stat/ammo","Stat/bulletLifesteal","Stat/spiritLifesteal",
+            "Stat/soul","Stat/spiritItem",
+            "Stat/spiritPower","Stat/stat","Stat/statWithDots",
+            "Stat/Silence","Stat/Stun","Stat/Invisible",],
         "Weapon Items" : ["Weapon/T1/basicMag","Weapon/T1/closeQuarters","Weapon/T1/headshotBooster","Weapon/T1/highVelocityMag","Weapon/T1/hollowPointWard","Weapon/T1/monsterRounds","Weapon/T1/rapidRounds","Weapon/T1/restorativeShot",
             "Weapon/T2/berserker","Weapon/T2/fleetfoot","Weapon/T2/kineticDash","Weapon/T2/longRange","Weapon/T2/meleeCharge","Weapon/T2/mysticShot","Weapon/T2/slowingBullets","Weapon/T2/soulShredderBullets","Weapon/T2/swiftStriker",
             "Weapon/T3/alchemicalFire","Weapon/T3/burstFire","Weapon/T3/escalatingResilience","Weapon/T3/headhunter","Weapon/T3/heroicAura","Weapon/T3/intensifyingMagazine","Weapon/T3/pointBlank","Weapon/T3/pristineEmblem","Weapon/T3/sharpshooter","Weapon/T3/teslaBullets","Weapon/T3/titanicMagazine","Weapon/T3/toxicBullets",
