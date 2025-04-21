@@ -87,7 +87,7 @@ function InfoOverlay(values){
                         </h3>
                         <h3 style={{fontFamily:"Retail", fontSize:"18px", color:"#efdfbf", width:"100%"}}>
                             Site created by Fred. If you have any issues or suggestions, please DM me on Discord at @fredleon <br/>
-                            <img src={FredLogo} id="FredLogo" alt="Website logo" style={{width:"70px", marginTop:"20px"}}/> <br/>
+                            <a href="https://github.com/ItzFred/Deadlock-Graphic-Designer"><img src={FredLogo} id="FredLogo" alt="Website logo" style={{width:"70px", marginTop:"20px"}}/></a> <br/>
                             This is my first project made in React, so I hope you can excuse me for not being the best programmer. But I had fun making it. <br/><br/>
                             Shoutout to Tryneus and his own graphic generator "Deadmock" for lending a helping hand.
                             

@@ -12,6 +12,7 @@ import { domToPng } from 'modern-screenshot'
 import { saveAs } from 'file-saver'
 import InfoOverlay from './InfoOverlay.jsx'
 import LoadPanel from './LoadPanel.jsx'
+import DefaultItem from '../public/templateItems/DeadlockGraphicDesigner.json'
 
 function App() {
 
@@ -35,11 +36,27 @@ function App() {
     if (localStorage.getItem("SelectedItemComponent") === null) localStorage.setItem("SelectedItemComponent", "Title")
     if (Utils.GetCurrentItemDict()["ColorPalette"] === undefined) Utils.SetCurrentItemDictKey("ColorPalette", "Weapon")
     if (Utils.GetCurrentItemDict()["ItemName"] === undefined) {
-      Utils.SetCurrentItemDictKey("ItemName", "Item")
-      var input = document.getElementById("ItemNameInput")
-      input.value = "Item"
+      Utils.SetCurrentItemDictKey("ItemName", "Item")  
     }
-    if (localStorage.getItem("Items") == null || localStorage.getItem("Items") == undefined) localStorage.setItem("Items", '['+JSON.stringify(localStorage.getItem("CurrentItem"))+']')
+
+    if (localStorage.getItem("Items") == null || localStorage.getItem("Items") == undefined) 
+    {
+      //Load the default item if the site is used for the first time
+      var newItem = crypto.randomUUID()
+      localStorage.setItem("CurrentItem", newItem)
+      localStorage.setItem(newItem, JSON.stringify(DefaultItem))
+
+      SetItemName(Utils.GetCurrentItemDict()["ItemName"] ?? "")
+
+      if (localStorage.getItem("Items") == null) localStorage.setItem("Items", '['+JSON.stringify(newItem)+']')
+      else {
+        var items = JSON.parse(localStorage.getItem("Items"))
+        if (!items.includes(newItem)) items.push(newItem)
+        localStorage.setItem("Items", JSON.stringify(items))
+      }
+
+      setEffectComponents()
+    }
 
 
     window.addEventListener("itemComponent", setEffectComponents);

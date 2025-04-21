@@ -52,12 +52,17 @@ function ComponentListElement(values){
                 case "Component_IconColor":
                     var defaultvar = ""
                     defaultvar = dict[values.path]["A"+values.place][2]
-                    component = <label>Component Icon Color:
+                    component = 
+                        <>
+                        <label>Component Icon Color:
                         <select name="Component_IconColor" defaultValue={defaultvar} style={{pointerEvents:"auto"}}>
                             <option value="Weapon">Weapon</option>
                             <option value="Vitality">Vitality</option>
                             <option value="Spirit">Spirit</option>
+                            <option value="Custom">Custom</option>
                         </select> </label>
+                        {dict[values.path]["A"+values.place][2] == "Custom"? <label><input type="color" name="Component_IconCustomColor" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict[values.path]["A"+values.place][3]}/><br/></label> : ""}
+                        </>
                     break;
                 case"Stat_Title":
                     var defaultvar = "Weapon"
@@ -81,12 +86,15 @@ function ComponentListElement(values){
                 case "ComponentOf_IconColor":
                     var defaultvar = ""
                     defaultvar = dict[values.path]["A"+values.place][2]
-                    component = <label>Component Icon Color: <br/>
+                    component = <><label>Component Icon Color:
                         <select name="ComponentOf_IconColor" defaultValue={defaultvar} style={{pointerEvents:"auto"}}>
                             <option value="Weapon">Weapon</option>
                             <option value="Vitality">Vitality</option>
                             <option value="Spirit">Spirit</option>
+                            <option value="Custom">Custom</option>
                         </select> </label>
+                        {dict[values.path]["A"+values.place][2] == "Custom"? <label><input type="color" name="ComponentOf_IconCustomColor" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict[values.path]["A"+values.place][3]}/><br/></label> : ""}
+                        </>
                     break;
                 case"StatTableCell_Type":
                     var defaultvar = ""
@@ -117,7 +125,9 @@ function ComponentListElement(values){
                                     <option value="Soul">Soul</option>
                                     <option value="Red">Red</option>
                                     <option value="Yellow">Yellow</option>
+                                    <option value="Custom">Custom</option>
                                 </select> </label>
+                                {dict[values.path]["A"+values.place][4] == "Custom"? <label><input type="color" name="IconCustomColor" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict[values.path]["A"+values.place][14]}/><br/></label> : ""}
                             <label><br/>Top Text: <input name="TopText" defaultValue={dict[values.path]["A"+values.place][5]}/></label><br/>
                             <label>Middle Text: <input name="MiddleText" defaultValue={dict[values.path]["A"+values.place][6]}/></label><br/>
                             <label>Bottom Text:
@@ -171,15 +181,18 @@ function ComponentListElement(values){
             case"Component_Title": arrayPlace = 0; break;
             case"Component_Icon": arrayPlace = 1; break;
             case"Component_IconColor": arrayPlace = 2; break;
+            case"Component_IconCustomColor": arrayPlace = 3; break;
             case"ComponentOf_Title": arrayPlace = 0; break;
             case"ComponentOf_Icon": arrayPlace = 1; break;
             case"ComponentOf_IconColor": arrayPlace = 2; break;
+            case"ComponentOf_IconCustomColor": arrayPlace = 3; break;
             case"StatTableCell_Type": arrayPlace = 0; break;
             case"StatList": arrayPlace = 1; break;
             case"Columns": arrayPlace = 9; break;
             case"CellWidth": arrayPlace = 2; break;
             case"Icon": arrayPlace = 3; break;
             case"IconColor": arrayPlace = 4; break;
+            case"IconCustomColor": arrayPlace = 14; break;
             case"TopText": arrayPlace = 5; break;
             case"MiddleText": arrayPlace = 6; break;
             case"BottomText": arrayPlace = 7; break;

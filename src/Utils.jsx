@@ -4,6 +4,12 @@ import SpiritScalingIcon from "./assets/icons/SpiritScaling.svg"
 import WeaponScalingIcon from "./assets/icons/WeaponScaling.svg"
 import MeleeScalingIcon from "./assets/icons/MeleeScaling.svg"
 import HealthScalingIcon from "./assets/icons/HealthScaling.svg"
+import * as React from "react";
+import { ReactSVG } from "react-svg";
+import { Suspense, lazy } from "react";
+
+import Icon from "./assets/icons/icon_soul.svg?react"
+
 
 class Utils{
     static SetDictionary = (obj, path, val) => { 
@@ -138,6 +144,8 @@ class Utils{
 
         return {__html: newtext}
     }
+
+
 }
 
 export default Utils

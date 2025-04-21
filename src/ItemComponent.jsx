@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import SoulIcon from "./assets/icons/icon_soul.svg"
+import GoldIcon from "./assets/icons/Gold.svg"
 import CooldownIcon from "./assets/icons/cooldown.svg"
 import Utils from "./Utils";
 import './index.css'
@@ -35,10 +36,15 @@ function ItemComponent(values){
     //HOOKS
     var [title, SetTitle] = useState("Title")
     var [cost, SetCost] = useState("6,000")
+    var [CostType, SetCostType] = useState("Soul")
+    var [CostColor, SetCostColor] = useState("#ffffff")
+    var [CostIcon, SetCostIcon] = useState("")
+    var [CostIconScale, SetCostIconScale] = useState(1.0)
 
     var [componentName, SetComponentName] = useState([""])
     var [componentIcon, SetComponentIcon] = useState([""])
     var [componentIconColor, SetComponentIconColor] = useState([""])
+    var [componentIconCustomColor, SetComponentIconCustomColor] = useState(["#ffffff"])
     var [components, SetComponents] = useState([])
 
     var [Stats, SetStatTitle] = useState(["Stat Description"])
@@ -52,7 +58,8 @@ function ItemComponent(values){
 
     var [componentOfName, SetComponentOfName] = useState(["Component"])
     var [componentOfIcon, SetComponentOfIcon] = useState([""])
-    var [componentOfIconColor, SetComponentOfIconColor] = useState([""])
+    var [ComponentOfIconColor, SetComponentOfIconColor] = useState([""])
+    var [ComponentOfIconCustomColor, SetComponentOfIconCustomColor] = useState(["#ffffff"])
     var [componentsOf, SetComponentsOf] = useState([])
 
     var [ItemComponents, SetItemComponents] = useState([""])
@@ -62,7 +69,11 @@ function ItemComponent(values){
         case "Title":
             setterFunctions = {
                 "Title" : SetTitle,
-                "Cost" : SetCost
+                "Cost" : SetCost,
+                "CostType" : SetCostType,
+                "CostColor" : SetCostColor,
+                "CostIcon" : SetCostIcon,
+                "CostIconScale" : SetCostIconScale
             }
             
 
@@ -88,17 +99,23 @@ function ItemComponent(values){
                     }}>{title}</h3>
                     <div style={{
                         display:"flex",
-                        flexDirection:"row"
-                    }}>
-                        <img src={SoulIcon} alt="Soul Icon"style={{
-                            width:"11.5px",
-                            paddingLeft: "12pt",
-                            paddingTop:"2.5pt",
-                            filter: ColorPalette.IconColors.Soul,
-                        }}/>
+                        flexDirection:"row",
+                        alignContent:"center"
+                    }}>         
+                        <div style={{
+                            maskImage: CostType == "Soul" || CostType == undefined ? "url('public/publicIcons/Stat/soul.svg')" : CostType == "Gold"? "url('public/publicIcons/Stat/Gold.svg')" : "url("+CostIcon+")", 
+                            maskSize: CostType != "Custom" ? "contain" : (16 * (CostIconScale ?? 1.0)) ,
+                            maskRepeat:"no-repeat",
+                            maskPosition:"center",
+                            width: CostType == "Soul" || CostType == undefined ? "12px" : "16px",
+                            marginLeft: "12pt",
+                            marginTop: "2.5pt",
+                            
+                            backgroundColor: CostType == "Soul" || CostType == undefined ? "#9affd6" : CostType == "Gold"? "#ffd400" : CostColor}}>
+                        </div>
                         <h3 style=
                         {{
-                            color:"#9affd6", 
+                            color: CostType == "Soul" || CostType == undefined  ? "#9affd6" : CostType == "Gold"? "#ffd400" : CostColor, 
                             fontSize:"19px",
                             fontFamily:"Retail",
                             paddingLeft: "3.6pt",
@@ -115,6 +132,7 @@ function ItemComponent(values){
                 "Component Name" : CompName,
                 "Component Icon" : CompIcon,
                 "Component Icon Color" : CompIconCol,
+                "Component Icon Custom Color" : CompIconCustomCol,
             }
 
             function CompName() {
@@ -141,7 +159,7 @@ function ItemComponent(values){
                 }
             }
 
-            function CompIconCol() {
+            function CompIconCustomCol() {
                 var dict = Utils.GetCurrentItemDict()["ItemComponent_"+values.index]
                 if (dict["Components"] !== undefined){
                     var colors = []
@@ -153,6 +171,18 @@ function ItemComponent(values){
                 }
             }
 
+            function CompIconCol() {
+                var dict = Utils.GetCurrentItemDict()["ItemComponent_"+values.index]
+                if (dict["Components"] !== undefined){
+                    var colors = []
+                    var vals = Object.values(dict["Components"])
+                    vals.forEach(e => {
+                        colors.push(e[3])
+                    })
+                    SetComponentIconCustomColor(colors)
+                }
+            }
+
             function SetComps(){
                 var list = []
                 for (var i = 0; i < componentName.length; i++){
@@ -161,7 +191,7 @@ function ItemComponent(values){
                         <div style={{
                             width:"36px",
                             height:"36px",
-                            backgroundColor: componentIconColor[i] == undefined || componentIconColor[i] == null? ColorPalette.GetColor("ComponentsIconPanel", "Weapon") : ColorPalette.GetColor("ComponentsIconPanel", componentIconColor[i]),
+                            backgroundColor: componentIconColor[i] == undefined || componentIconColor[i] == null? ColorPalette.GetColor("ComponentsIconPanel", "Weapon") : componentIconColor[i] == "Custom" ? ColorPalette.GetColor("ComponentsIconPanel", componentIconColor[i], componentIconCustomColor[i]) : ColorPalette.GetColor("ComponentsIconPanel", componentIconColor[i]),
                             borderRadius:"100%",
                             marginTop:"1.5pt",
                             marginLeft: "13pt",
@@ -170,12 +200,18 @@ function ItemComponent(values){
                             display:"flex",
                             justifyContent:"center"
                         }}>
-                            {(componentIcon[i] != null && componentIcon[i] != undefined && componentIcon[i] != "" && checkState != false) ? <img src={ componentIcon[i] } crossOrigin="anonymous" onError={(e)=>{e.target.src=null; SetCheckState(false)}} style={{
-                                width:"22px", 
-                                height:"22px", 
-                                alignSelf:"center", 
-                                filter:componentIconColor[i] == undefined || componentIconColor[i] == null? ColorPalette.GetColor("ComponentsIconStyle", "Weapon") : ColorPalette.GetColor("ComponentsIconStyle", componentIconColor[i])}}/> : ""}
-                        </div>
+                            {(componentIcon[i] != null && componentIcon[i] != undefined && componentIcon[i] != "" && checkState != false) ? 
+                                <div style={{
+                                    maskImage: "url('"+componentIcon[i]+"')", 
+                                    maskSize: "contain",
+                                    maskPosition:"center",
+                                    maskRepeat:"no-repeat",
+                                    width:"22px", 
+                                    height:"22px", 
+                                    alignSelf:"center",   
+                                    justifySelf:"center",                                
+                                    backgroundColor: componentIconColor[i] == undefined || componentIconColor[i] == null? ColorPalette.GetColor("ComponentsIcon", "Weapon") : componentIconColor[i] == "Custom" ? ColorPalette.GetColor("ComponentsIcon", componentIconColor[i], componentIconCustomColor[i]) : ColorPalette.GetColor("ComponentsIcon", componentIconColor[i])}}/> : ""}
+                            </div>
                         <div style={{
                             height:"36px",
                             backgroundColor:ColorPalette.GetColor("ComponentsTextPanel"),
@@ -363,6 +399,7 @@ function ItemComponent(values){
                 "ComponentOf Name" : CompOfName,
                 "ComponentOf Icon" : CompOfIcon,
                 "ComponentOf Icon Color" : CompOfIconCol,
+                "ComponentOf Icon Custom Color" : CompOfIconCustomCol,
             }
 
             function CompOfName() {
@@ -401,6 +438,18 @@ function ItemComponent(values){
                 }
             }
 
+            function CompOfIconCustomCol() {
+                var dict = Utils.GetCurrentItemDict()["ItemComponent_"+values.index]
+                if (dict["ComponentsOf"] !== undefined){
+                    var colors = []
+                    var vals = Object.values(dict["ComponentsOf"])
+                    vals.forEach(e => {
+                        colors.push(e[3])
+                    })
+                    SetComponentOfIconCustomColor(colors)
+                }
+            }
+
             function SetCompsOf(){
                 var list = []
                 for (var i = 0; i < componentOfName.length; i++){
@@ -409,7 +458,7 @@ function ItemComponent(values){
                         <div style={{
                             width:"30px",
                             height:"30px",
-                            backgroundColor:componentOfIconColor[i] == undefined || componentOfIconColor[i] == null? ColorPalette.GetColor("ComponentsOfIconPanel", "Weapon") : ColorPalette.GetColor("ComponentsOfIconPanel", componentOfIconColor[i]),
+                            backgroundColor:ComponentOfIconColor[i] == undefined || ComponentOfIconColor[i] == null? ColorPalette.GetColor("ComponentsOfIconPanel", "Weapon") : ComponentOfIconColor[i] == "Custom"?  ColorPalette.GetColor("ComponentsOfIconPanel", ComponentOfIconColor[i], ComponentOfIconCustomColor[i]) : ColorPalette.GetColor("ComponentsOfIconPanel", ComponentOfIconColor[i]),
                             borderRadius:"100%",
                             marginTop:"5pt",
                             marginLeft: "15pt",
@@ -419,11 +468,17 @@ function ItemComponent(values){
                             display:"flex",
                             justifyContent:"center"
                         }}>
-                            {(componentOfIcon[i] != null && componentOfIcon[i] != undefined && componentOfIcon[i] != "" && checkState != false) ? <img src={componentOfIcon[i]} crossOrigin="anonymous" onError={(e)=>{e.target.src=null; SetCheckState(false)}} style={{
+                            {(componentOfIcon[i] != null && componentOfIcon[i] != undefined && componentOfIcon[i] != "" && checkState != false) ?                            
+                            <div style={{
+                                maskImage: "url('"+componentOfIcon[i]+"')", 
+                                maskSize: "contain",
+                                maskPosition:"center",
+                                maskRepeat:"no-repeat",
                                 width:"20px", 
                                 height:"20px", 
-                                alignSelf:"center", 
-                                filter:componentOfIconColor[i] == undefined || componentOfIconColor[i] == null? ColorPalette.GetColor("ComponentsOfIconStyle", "Weapon") : ColorPalette.GetColor("ComponentsOfIconStyle", componentOfIconColor[i])}}/> : ""}
+                                alignSelf:"center",   
+                                justifySelf:"center",                                
+                                backgroundColor: ComponentOfIconColor[i] == undefined || ComponentOfIconColor[i] == null? ColorPalette.GetColor("ComponentsIcon", "Weapon") : ComponentOfIconColor[i] == "Custom" ? ColorPalette.GetColor("ComponentsIcon", ComponentOfIconColor[i], ComponentOfIconCustomColor[i]) : ColorPalette.GetColor("ComponentsIcon", ComponentOfIconColor[i])}}/> : ""}
                         </div>
                         <div style={{
                             height:"30px",
@@ -556,12 +611,17 @@ function ItemComponent(values){
                                         backgroundImage: vals[i][10] == "None"? "none" : "radial-gradient("+ColorPalette.GetColor("StatTablePanel")+" 50%,"+ColorPalette.GetScalingColor(vals[i][10],vals[i][12],0.4)+")",
                                     }}>
                                         <div style={{display:"flex", justifyContent:"center"}}>
-                                            {(vals[i][3] != null && vals[i][3] != undefined && vals[i][3] != "" && checkState != false) ? <img src={vals[i][3]} crossOrigin="anonymous" onError={(e)=>{e.target.src=null; SetCheckState(false)}} style={{
-                                            width:"17px", 
-                                            height:"17px",
-                                            marginRight:"4px",
-                                            alignSelf:"center",
-                                            filter:ColorPalette.GetIconColor(vals[i][4])}}/> : ""}
+                                            {(vals[i][3] != null && vals[i][3] != undefined && vals[i][3] != "" && checkState != false) ? 
+                                            <div style={{
+                                                maskImage: "url('"+vals[i][3]+"')", 
+                                                maskSize: "contain",
+                                                maskPosition:"center",
+                                                maskRepeat:"no-repeat",
+                                                width:"17px", 
+                                                height:"17px",
+                                                alignSelf:"center",   
+                                                marginRight:"4px",           
+                                                backgroundColor: vals[i][4] == "Custom"? (vals[i][14] ?? "#000000") : ColorPalette.IconHexColors[vals[i][4]]}}/> : ""}
                                             <h3 style=
                                             {{
                                                 fontSize:"20px",
@@ -621,7 +681,6 @@ function ItemComponent(values){
                                     marginLeft: i == 0? "12.5pt" : "2pt",
                                     marginRight: i == vals.length - 1? "12.5pt" : "2pt",
                                     marginTop: (vals[i][10] == "None" || vals[i][10] == undefined || vals[i][10] == null) && scalingpresent? "20px" : "0px",
-                                    display:"flex",
                                     flexGrow: vals[i][2] != undefined? vals[i][2] : 1,
                                     flexShrink: 1,
                                     flexBasis: 0,

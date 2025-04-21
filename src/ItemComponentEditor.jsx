@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import ComponentList from "./ComponentList"
 import Utils from "./Utils"
+import IconSelector from "./IconSelector"
 
 function ItemComponentEditor(values){
 
@@ -104,7 +105,16 @@ function ItemComponentEditor(values){
             case "Title":
                 SetPartComponents( [
                     <label>Title: <input name="Title" maxLength="48" defaultValue={dict["Title"]}/><br/></label>,
-                    <label>Cost: <input name="Cost" maxLength="48" defaultValue={dict["Cost"]}/></label>
+                    <label>Cost: <input name="Cost" maxLength="48" defaultValue={dict["Cost"]}/><br/></label>,
+                    <label>Cost Type:
+                        <select name="CostType" defaultValue={dict["CostType"]} style={{pointerEvents:"auto", width:"50%"}}>
+                            <option value="Soul">Soul</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Custom">Custom</option>
+                    </select><br/></label>,
+                    dict["CostType"] == "Custom"? <label>Cost Icon: <IconSelector width="50%" path="CostIcon" place={null} index={values.index} arrayPlace={3} defaultValue={dict["CostIcon"]}/><br/></label> : "",
+                    dict["CostType"] == "Custom"? <label>Cost Color: <input name="CostColor" type="color" defaultValue={dict["CostColor"]}/><br/></label> : "",
+                    dict["CostType"] == "Custom"? <label>Cost Icon Scale: <input name="CostIconScale" type="number" min={0} step={0.1} defaultValue={dict["CostIconScale"]}/><br/></label> : ""
                 ])
                 break
             case "Components":
@@ -128,7 +138,7 @@ function ItemComponentEditor(values){
                     </select> </label>,
                     dict["CooldownType"] == "Custom"? <label>Custom Cooldown Text: <input name="CooldownCustomText" maxLength="64" defaultValue={dict["CooldownCustomText"]}/></label> : <></>,
                     <label>Enable Cooldown: <input name="CooldownEnabled" defaultChecked={dict["CooldownEnabled"] == "true" ? true : false} type="checkbox"/></label>,
-                    dict["CooldownEnabled"] == "true"? <label>Cooldown: <input name="Cooldown" maxLength="10" defaultValue={dict["Cooldown"]}/></label> : <></>
+                    dict["CooldownEnabled"] == "true"? <label>Cooldown: <input name="Cooldown" maxLength="10" defaultValue={dict["Cooldown"]}/></label> : ""
                 ])
                 break
             case "Description":

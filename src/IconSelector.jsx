@@ -8,14 +8,14 @@ const IconSelector = (values) => {
     const [openMenu, SetOpenMenu] = useState(false)
 
     const imageFiles = {
-        "Stat Icons" : ["Stat/abilityDuration","Stat/abilityFrame","Stat/weaponItem","Stat/abilityRange","Stat/chevron","Stat/lightningBolt","Stat/lock","Stat/plus","Stat/bulletShieldAndDPS","Stat/punch","Stat/spiritShield",
+        "Stat Icons" : ["","Stat/abilityDuration","Stat/abilityFrame","Stat/weaponItem","Stat/abilityRange","Stat/chevron","Stat/lightningBolt","Stat/lock","Stat/plus","Stat/bulletShieldAndDPS","Stat/punch","Stat/spiritShield",
             "Stat/blankShieldPointed","Stat/blankShield","Stat/shieldPointedWithTrim","Stat/healAmp","Stat/bulletResist","Stat/spiritResist","Stat/WeaponShield","Stat/FlameShield","Stat/vitalityItem",
             "Stat/boot","Stat/MovementUp","Stat/MovementDown","Stat/stamina","Stat/moveAndSprintSpeed",
             "Stat/ChargeBolt","Stat/chargeCooldown","Stat/cooldown","Stat/maxHealth","Weapon/T4/luckyShot","Stat/healthRegen","Stat/Spinner",
             "Stat/bulletDamage","Stat/singleBullet","Stat/tripleBullet","Stat/fireRate","Stat/ammo","Stat/bulletLifesteal","Stat/spiritLifesteal",
             "Stat/soul","Stat/spiritItem",
             "Stat/spiritPower","Stat/stat","Stat/statWithDots",
-            "Stat/Silence","Stat/Stun","Stat/Invisible",],
+            "Stat/Silence","Stat/Stun","Stat/Invisible","Stat/Vision",],
         "Weapon Items" : ["Weapon/T1/basicMag","Weapon/T1/closeQuarters","Weapon/T1/headshotBooster","Weapon/T1/highVelocityMag","Weapon/T1/hollowPointWard","Weapon/T1/monsterRounds","Weapon/T1/rapidRounds","Weapon/T1/restorativeShot",
             "Weapon/T2/berserker","Weapon/T2/fleetfoot","Weapon/T2/kineticDash","Weapon/T2/longRange","Weapon/T2/meleeCharge","Weapon/T2/mysticShot","Weapon/T2/slowingBullets","Weapon/T2/soulShredderBullets","Weapon/T2/swiftStriker",
             "Weapon/T3/alchemicalFire","Weapon/T3/burstFire","Weapon/T3/escalatingResilience","Weapon/T3/headhunter","Weapon/T3/heroicAura","Weapon/T3/intensifyingMagazine","Weapon/T3/pointBlank","Weapon/T3/pristineEmblem","Weapon/T3/sharpshooter","Weapon/T3/teslaBullets","Weapon/T3/titanicMagazine","Weapon/T3/toxicBullets",
@@ -41,7 +41,13 @@ const IconSelector = (values) => {
         var index = JSON.parse(localStorage.getItem("currentIndex"))
         var arrayPlace = JSON.parse(localStorage.getItem("currentArrayPlace"))
         var dict = Utils.GetCurrentItemDict()["ItemComponent_"+index]
-        Utils.SetDictionaryArray(dict, path+".A"+place, "./publicIcons/"+iconName+".svg", arrayPlace)
+        
+        if (place == null){
+            Utils.SetDictionaryArray(dict, path, iconName == "" ? "" : "./publicIcons/"+iconName+".svg", 0)
+        }
+        else{
+            Utils.SetDictionaryArray(dict, path+".A"+place, iconName == "" ? "" : "./publicIcons/"+iconName+".svg", arrayPlace)
+        }
         Utils.SetCurrentItemDictKey("ItemComponent_"+index, dict)
         window.dispatchEvent(new Event("ItemComponentEditorInputSent_"+index));
         window.dispatchEvent(new Event("itemComponent"));
@@ -57,7 +63,7 @@ const IconSelector = (values) => {
             v.forEach(e => {
                 imgElements.push(
                     <button className="IconSelectButton" style={{padding:"2px", pointerEvents:"auto"}} type="button" onClick={elem => { SelectIcon(e, elem)}}>
-                        <img className="IconSelectImage" src={"./publicIcons/"+e+".svg"} style={{width:"28px", height:"28px", position:"relative", top:"2px",}}/>
+                        {e == "" ? "" : <img className="IconSelectImage" src={"./publicIcons/"+e+".svg"} style={{width:"28px", height:"28px", position:"relative", top:"2px",}}/>}
                     </button>
                 )
             })
@@ -73,7 +79,7 @@ const IconSelector = (values) => {
 
     return(
         <>
-        <button popoverTarget="IconSelectorPopover" style={{
+        <button popoverTarget="IconSelectorPopover" className="IconSelectButton" style={{
             margin: "8px",
             padding: "8px",
             borderRadius: "8px",
@@ -83,7 +89,7 @@ const IconSelector = (values) => {
             pointerEvents:"all",
         }} onClick={e => { localStorage.setItem("currentValue", JSON.stringify(values.place)); localStorage.setItem("currentPath", JSON.stringify(values.path)); localStorage.setItem("currentIndex", JSON.stringify(values.index)); localStorage.setItem("currentArrayPlace", JSON.stringify(values.arrayPlace)); e.stopPropagation();}} type="button">
             {values.defaultValue != undefined && values.defaultValue != null? 
-                <img src={values.defaultValue} style={{width:"20px", height:"20px", filter:"invert(96%) sepia(7%) saturate(1171%) hue-rotate(333deg) brightness(99%) contrast(90%)", marginRight:"5px", alignSelf:"center"}}/>
+                values.defaultValue == "" ? "" : <img className="IconSelectImage" src={values.defaultValue} style={{width:"20px", height:"20px", marginRight:"5px", alignSelf:"center"}}/>
                 : ""}
             Select Icon           
         </button>

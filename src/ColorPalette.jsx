@@ -91,7 +91,7 @@ class ColorPalette{
         TitleShadowText : "#c0c0c0",
         Text : "#f7f3f0",
         DarkText : "#c8c0bc",
-        SubtitleText : "#868686",
+        SubtitleText : "#A6A6A6",
         PassiveText : "#9a948e",
         TitlePanel : "#e5e5e5",
         TitlePanelStatTop : "#bfc0c0",
@@ -122,6 +122,16 @@ class ColorPalette{
         Soul : "invert(78%) sepia(30%) saturate(416%) hue-rotate(100deg) brightness(111%) contrast(101%)",
         Red : "invert(72%) sepia(69%) saturate(4331%) hue-rotate(318deg) brightness(101%) contrast(109%)",
         Yellow : "invert(76%) sepia(100%) saturate(3163%) hue-rotate(359deg) brightness(103%) contrast(105%)"
+    }
+
+    static IconHexColors = {
+        Weapon : "#ec981a",
+        Vitality : "#00ff9a",
+        Spirit : "#ce91ff",
+        Gray : "#a9a9a9",
+        Soul : "#9affd6",
+        Red : "#ff6c69",
+        Yellow : "#ffd400"
     }
 
     static GetIconColor(colorName){
@@ -162,7 +172,7 @@ class ColorPalette{
             var color = Utils.hexToRgb((pulledColor == null || pulledColor == undefined)? "#ffffff" : pulledColor)
             var BWColor = Utils.hexToRgb(this.CustomColors[colorName])
             var newColorRGB
-            if (colorName == "Text" || colorName == "DarkText" || colorName == "PassiveText"){
+            if (colorName == "Text" || colorName == "DarkText" || colorName == "PassiveText" || colorName == "SubtitleText"){
                 newColorRGB = {
                     r : Utils.lerp( color.r * (BWColor.r / 255.0), BWColor.r, 0.6),
                     g : Utils.lerp( color.g * (BWColor.g / 255.0), BWColor.g, 0.6),

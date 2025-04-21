@@ -1,6 +1,7 @@
 .IconSelectImage{
     filter:invert(96%) sepia(7%) saturate(1171%) hue-rotate(333deg) brightness(99%) contrast(90%);
 }
+
 .IconSelectButton:focus .IconSelectImage{
     filter:invert(0%) sepia(90%) saturate(66%) hue-rotate(34deg) brightness(105%) contrast(80%)
 }
