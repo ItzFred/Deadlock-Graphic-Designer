@@ -40,6 +40,13 @@ function ItemComponent(values){
     var [CostColor, SetCostColor] = useState("#ffffff")
     var [CostIcon, SetCostIcon] = useState("")
     var [CostIconScale, SetCostIconScale] = useState(1.0)
+    var [SideStat, SetSideStat] = useState("none")
+    var [SideStatAmount, SetSideStatAmount] = useState("T1")
+    var [SideStatCustomIcon, SetSideStatCustomIcon] = useState([""])
+    var [SideStatCustomIconColor, SetSideStatCustomIconColor] = useState(["#ffffff"])
+    var [SideStatPanelColor, SetSideStatPanelColor] = useState("#ffffff")
+    var [SideStatTopPanelText, SetSideStatTopPanelText] = useState([""])
+    var [SideStatBottomPanelText, SetSideStatBottomPanelText] = useState([""])
 
     var [componentName, SetComponentName] = useState([""])
     var [componentIcon, SetComponentIcon] = useState([""])
@@ -73,9 +80,79 @@ function ItemComponent(values){
                 "CostType" : SetCostType,
                 "CostColor" : SetCostColor,
                 "CostIcon" : SetCostIcon,
-                "CostIconScale" : SetCostIconScale
+                "CostIconScale" : SetCostIconScale,
+                "SideStat" : SetSideStat,
+                "SideStatAmount" : SetSideStatAmount,
+                "SideStatCustomIcon" : SetSideStatCustomIcon,
+                "SideStatCustomIconColor" : SetSideStatCustomIconColor,
+                "SideStatPanelColor" : SetSideStatPanelColor,
+                "SideStatTopPanelText" : SetSideStatTopPanelText,
+                "SideStatBottomPanelText" : SetSideStatBottomPanelText
+
             }
             
+            function GetSideStatInfo(type = "Stat", palette = "None", tier){
+                if (palette == "Self") {
+                    palette = Utils.GetCurrentItemDict()["ColorPalette"] == undefined ? "Weapon" : Utils.GetCurrentItemDict()["ColorPalette"] 
+                }
+                if (palette == undefined) palette = "None"
+                if (tier == undefined) tier = "T1"
+
+                var topText = SideStatTopPanelText == undefined ? "" : SideStatTopPanelText[0]
+                var botText = SideStatBottomPanelText == undefined ? "" : SideStatBottomPanelText[0]
+                var icon = SideStatCustomIcon == undefined ? "" : SideStatCustomIcon[0]
+                var col = SideStatCustomIconColor == undefined ? "#ffffff" : SideStatCustomIconColor[0]
+                
+                switch(type){
+                    case "Stat": 
+                        if (palette == "None") return ""
+                        else if (palette == "Self") return ""
+                        else if (palette == "Weapon") {
+                            if (tier == "T1") return "**((+))[[6]]((%))**"
+                            else if (tier == "T2") return "**((+))[[10]]((%))**"
+                            else if (tier == "T3") return "**((+))[[14]]((%))**"
+                            else if (tier == "T4") return "**((+))[[18]]((%))**"
+                            else return topText
+                        }
+                        else if (palette == "Spirit") {
+                            if (tier == "T1") return "**((+))[[4]]**"
+                            else if (tier == "T2") return "**((+))[[8]]**"
+                            else if (tier == "T3") return "**((+))[[12]]**"
+                            else if (tier == "T4") return "**((+))[[16]]**"
+                            else return topText
+                        }
+                        else if (palette == "Vitality") {
+                            if (tier == "T1") return "**((+))[[11]]((%))**"
+                            else if (tier == "T2") return "**((+))[[14]]((%))**"
+                            else if (tier == "T3") return "**((+))[[17]]((%))**"
+                            else if (tier == "T4") return "**((+))[[20]]((%))**"
+                            else return topText
+                        }
+                        else return topText
+                    case "Text" :
+                        if (palette == "None") return ""
+                        else if (palette == "Self") return ""
+                        else if (palette == "Weapon") return "Weapon Damage"
+                        else if (palette == "Spirit") return "Spirit Power"
+                        else if (palette == "Vitality") return "Base Health"
+                        else return botText
+                    case "Icon" : 
+                        if (palette == "None") return ""
+                        else if (palette == "Self") return ""
+                        else if (palette == "Weapon") return "./public/publicIcons/Stat/WeaponItem.svg"
+                        else if (palette == "Spirit") return "./public/publicIcons/Stat/spiritPower.svg"
+                        else if (palette == "Vitality") return "./public/publicIcons/Stat/VitalityItem.svg"
+                        else return icon
+                    case "IconColor" :
+                        if (palette == "None") return ""
+                        else if (palette == "Self") return ""
+                        else if (palette == "Weapon") return ColorPalette.GetColor("TitlePanelStatIcon", palette)
+                        else if (palette == "Spirit") return ColorPalette.GetColor("TitlePanelStatIcon", palette)
+                        else if (palette == "Vitality") return ColorPalette.GetColor("TitlePanelStatIcon", palette)
+                        else return col
+                }
+                return null
+            }
 
             return(
                 <div style={{
@@ -83,44 +160,93 @@ function ItemComponent(values){
                     width:"450px", 
                     height:"96px",
                     borderRadius:"7pt",
+                    display:"flex",
+                    flexDirection:"row",
                     borderTopLeftRadius: values.placement == 0 ? "7pt" : "0pt",
                     borderTopRightRadius: values.placement == 0 ? "7pt" : "0pt",
                     borderBottomLeftRadius: values.placement < (values.listSize - 1) ? "0pt" : "7pt",
                     borderBottomRightRadius: values.placement < (values.listSize - 1) ? "0pt" : "7pt"
                     }}>
-                    <h3 style=
-                    {{
-                        color:ColorPalette.GetColor("TitleText"), 
-                        fontSize:"20pt",
-                        fontFamily:"Retail",
-                        paddingLeft: "12pt",
-                        paddingTop: "12.5pt",
-                        textShadow:"1.5pt 1.5pt 0pt "+ColorPalette.GetColor("TitleShadowText"),
-                    }}>{title}</h3>
                     <div style={{
                         display:"flex",
-                        flexDirection:"row",
-                        alignContent:"center"
-                    }}>         
-                        <div style={{
-                            maskImage: CostType == "Soul" || CostType == undefined ? "url('public/publicIcons/Stat/soul.svg')" : CostType == "Gold"? "url('public/publicIcons/Stat/Gold.svg')" : "url("+CostIcon+")", 
-                            maskSize: CostType != "Custom" ? "contain" : (16 * (CostIconScale ?? 1.0)) ,
-                            maskRepeat:"no-repeat",
-                            maskPosition:"center",
-                            width: CostType == "Soul" || CostType == undefined ? "12px" : "16px",
-                            marginLeft: "12pt",
-                            marginTop: "2.5pt",
-                            
-                            backgroundColor: CostType == "Soul" || CostType == undefined ? "#9affd6" : CostType == "Gold"? "#ffd400" : CostColor}}>
-                        </div>
+                        flexDirection:"column",
+                        width:"100%"
+                    }}>
                         <h3 style=
                         {{
-                            color: CostType == "Soul" || CostType == undefined  ? "#9affd6" : CostType == "Gold"? "#ffd400" : CostColor, 
-                            fontSize:"19px",
+                            color:ColorPalette.GetColor("TitleText"), 
+                            fontSize:"20pt",
                             fontFamily:"Retail",
-                            paddingLeft: "3.6pt",
-                            paddingTop:"1.1pt"
-                        }}>{cost}</h3>
+                            paddingLeft: "12pt",
+                            paddingTop: "12.5pt",
+                            textShadow:"1.5pt 1.5pt 0pt "+ColorPalette.GetColor("TitleShadowText"),
+                        }}>{title}</h3>
+                        <div style={{
+                            display:"flex",
+                            flexDirection:"row",
+                            alignContent:"center",
+                        }}>         
+                            <div style={{
+                                maskImage: CostType == "Soul" || CostType == undefined ? "url('./publicIcons/Stat/soul.svg')" : CostType == "Gold"? "url('./publicIcons/Stat/Gold.svg')" : "url("+CostIcon+")", 
+                                maskSize: CostType != "Custom" ? "contain" : (16 * (CostIconScale ?? 1.0)) ,
+                                maskRepeat:"no-repeat",
+                                maskPosition:"center",
+                                width: CostType == "Soul" || CostType == undefined ? "12px" : "16px",
+                                marginLeft: "12pt",
+                                marginTop: "2.5pt",
+                                
+                                backgroundColor: CostType == "Soul" || CostType == undefined ? "#9affd6" : CostType == "Gold"? "#ffd400" : CostColor ?? "#000000"}}>
+                            </div>
+                            <h3 style=
+                            {{
+                                color: CostType == "Soul" || CostType == undefined  ? "#9affd6" : CostType == "Gold"? "#ffd400" : CostColor ?? "#000000", 
+                                fontSize:"19px",
+                                fontFamily:"Retail",
+                                paddingLeft: "3.6pt",
+                                paddingTop:"1.1pt"
+                            }}>{cost}</h3>
+                        </div>
+                    </div>
+                    <div style={{
+                        alignSelf:"center",
+                        display: SideStat == "None" || SideStat == undefined? "none" : "flex",
+                        flexDirection:"column",
+                        marginRight:"20px",
+                        paddingTop:"6px",
+                        justifySelf:"flex-end"}}>
+                            <div style={{
+                                width:"90px", 
+                                height:"25px",
+                                display:"flex",
+                                flexDirection:"row",
+                                justifyContent:"center",
+                                alignContent:"center",
+                                backgroundColor:ColorPalette.GetColor("TitlePanelStatTop",
+                                    SideStat == "Self"? Utils.GetCurrentItemDict()["ColorPalette"] : SideStat, 
+                                    SideStat == "Custom"? SideStatPanelColor : SideStat == "Self" && Utils.GetCurrentItemDict()["ColorPalette"] != "Custom"? Utils.GetCurrentItemDict()["CustomColor"] : null)}}>
+                                
+                                <h3 style={{fontSize:"17px", fontFamily:"Retail", alignSelf:"center", textAlign:"center"}}
+                                dangerouslySetInnerHTML={Utils.markdown(GetSideStatInfo("Stat", SideStat, SideStatAmount), SideStat != "Self" ? SideStat : Utils.GetCurrentItemDict()["ColorPalette"])}/>
+                                <div style={{
+                                    maskImage: "url('"+GetSideStatInfo("Icon", SideStat, SideStatAmount)+"')", 
+                                    maskSize: "contain",
+                                    maskPosition:"center",
+                                    maskRepeat:"no-repeat",
+                                    marginLeft:"4px",
+                                    width:"15px", 
+                                    height:"15px", 
+                                    alignSelf:"center",   
+                                    justifySelf:"center",                                
+                                    backgroundColor: GetSideStatInfo("IconColor", SideStat, SideStatAmount)}}/>
+                            </div>
+                            <div style={{
+                                width:"90px", 
+                                backgroundColor:ColorPalette.GetColor("TitlePanelStatBottom",
+                                    SideStat == "Self"? Utils.GetCurrentItemDict()["ColorPalette"] : SideStat, 
+                                    SideStat == "Custom"? SideStatPanelColor : SideStat == "Self" && Utils.GetCurrentItemDict()["ColorPalette"] != "Custom"? Utils.GetCurrentItemDict()["CustomColor"] : null)}}>
+                                <h3 style={{fontSize:"12px", paddingTop:"1px", paddingBottom:"1px", fontWeight:"500", fontFamily:"Retail", alignSelf:"center", textAlign:"center"}}
+                                dangerouslySetInnerHTML={Utils.markdown(GetSideStatInfo("Text", SideStat, SideStatAmount), SideStat != "Self" ? SideStat : Utils.GetCurrentItemDict()["ColorPalette"])}/>
+                            </div>
                     </div>
                 </div>
             )
@@ -218,7 +344,7 @@ function ItemComponent(values){
                             borderRadius:"18px",
                             marginTop:"1.5pt",
                             marginLeft: "-26pt",
-                            paddingRight: "16px",
+                            paddingRight: "20px",
                             marginRight: "4px",
                             position:"relative",
                             alignContent:"center"
@@ -281,7 +407,7 @@ function ItemComponent(values){
                     paddingTop:"9.75pt",                
                     }}>        
                         <h3 style={{
-                            fontSize:"18px",
+                            fontSize:"17px",
                             color: ColorPalette.GetColor("Text"),
                             fontFamily:"Retail",
                             fontWeight:"600",
@@ -362,6 +488,11 @@ function ItemComponent(values){
         case "Description":
             setterFunctions = {
                 "Description" : SetDescription,
+                "ItemComps" : SetItemComps_Description
+            }
+
+            function SetItemComps_Description(){
+                SetItemComponents(Utils.GetCurrentItemDict()["itemComponents"])
             }
 
             return(
@@ -384,10 +515,10 @@ function ItemComponent(values){
                         height:"auto",
                         fontFamily:"Retail",
                         fontWeight:"600",
-                        paddingTop:"11.6pt",
-                        paddingBottom:"12pt",
-                        paddingRight:"12.5pt",
-                        paddingLeft:"12.5pt",
+                        paddingTop: values.placement == 0? "12pt" : Object.values(ItemComponents)[values.placement - 1] == "Stats" ? "0pt" : "12pt",
+                        paddingBottom: values.placement == Object.keys(ItemComponents).length - 1? "12pt" : Object.values(ItemComponents)[values.placement + 1] == "Stats" ? "0pt" : "12pt",
+                        paddingRight:"13.5pt",
+                        paddingLeft:"13.5pt",
                     }} dangerouslySetInnerHTML={Utils.markdown((Description != null && Description != undefined)? Description.toString() : "")}></h3>
                 </div>
             )
@@ -478,7 +609,7 @@ function ItemComponent(values){
                                 height:"20px", 
                                 alignSelf:"center",   
                                 justifySelf:"center",                                
-                                backgroundColor: ComponentOfIconColor[i] == undefined || ComponentOfIconColor[i] == null? ColorPalette.GetColor("ComponentsIcon", "Weapon") : ComponentOfIconColor[i] == "Custom" ? ColorPalette.GetColor("ComponentsIcon", ComponentOfIconColor[i], ComponentOfIconCustomColor[i]) : ColorPalette.GetColor("ComponentsIcon", ComponentOfIconColor[i])}}/> : ""}
+                                backgroundColor: ComponentOfIconColor[i] == undefined || ComponentOfIconColor[i] == null? ColorPalette.GetColor("ComponentsOfIcon", "Weapon") : ComponentOfIconColor[i] == "Custom" ? ColorPalette.GetColor("ComponentsOfIcon", ComponentOfIconColor[i], ComponentOfIconCustomColor[i]) : ColorPalette.GetColor("ComponentsOfIcon", ComponentOfIconColor[i])}}/> : ""}
                         </div>
                         <div style={{
                             height:"30px",
@@ -486,7 +617,7 @@ function ItemComponent(values){
                             borderRadius:"18px",
                             marginTop:"5pt",
                             marginLeft: "-22pt",
-                            paddingRight: "16px",
+                            paddingRight: "20px",
                             marginRight: "4px",
                             position:"relative",
                             alignContent:"center"
@@ -535,6 +666,72 @@ function ItemComponent(values){
 
             function SetItemComps(){
                 SetItemComponents(Utils.GetCurrentItemDict()["itemComponents"])
+            }
+
+            function CreateListRowDivs(text, rowCount, vals, p, scalingpresent){
+
+                var CreateListRowText = (textArr, num, rows) => {
+                    var textComps = []
+                    for (var k = 0; k < textArr.length; k++){
+                        if ((k % rows) == num) textComps.push(
+                            <h3 style=
+                            {{
+                                fontSize:"16px",
+                                alignSelf:"center",
+                                color: ColorPalette.GetColor("Text"),
+                                height:"auto",
+                                width:"100%",
+                                fontFamily:"Retail",
+                                fontWeight:"600",
+                                paddingRight:"12pt",
+                                paddingTop:"5px",
+                                paddingLeft:"36pt",
+                                lineHeight: "22px",
+                            }} dangerouslySetInnerHTML={Utils.markdown(textArr[k])}></h3>
+                        )
+                    }
+                    return textComps
+                }
+
+                var textArray = text.split("\\n")
+                var divComps = []
+
+                for(var i = 0; i < rowCount; i++ ){
+                    divComps.push(
+                        <div style={{
+                            display:"flex",
+                            flexDirection:"column",
+                            width: (100 / rowCount)+"%",
+                            textAlign:"left",
+                        }}>
+                            {CreateListRowText(textArray, i, rowCount)}
+                        </div>
+                    )
+                }
+                return (
+                    <div style={{
+                        backgroundColor:ColorPalette.GetColor("StatTablePanel"),
+                        height:"auto",
+                        minHeight:"34px",
+                        borderRadius:"3pt",
+                        paddingTop:"5pt",
+                        paddingBottom:"5pt",
+                        borderTopLeftRadius: p > 0 || Object.values(ItemComponents)[values.placement - 1] == "StatTableRow" ? "0pt" : "3pt",
+                        borderBottomLeftRadius: p > 0 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
+                        borderTopRightRadius: p < vals.length - 1 || Object.values(ItemComponents)[values.placement - 1] == "StatTableRow"? "0pt" : "3pt",
+                        borderBottomRightRadius: p < vals.length - 1 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
+                        marginLeft: p == 0? "12.5pt" : "2pt",
+                        marginRight: p == vals.length - 1? "12.5pt" : "2pt",
+                        marginTop: (vals[p][10] == "None" || vals[p][10] == undefined || vals[i][10] == null) && scalingpresent? "20px" : "0px",
+                        display:"flex",
+                        flexDirection:"row",
+                        alignContent:"center",
+                        flexGrow: vals[p][2] != undefined? vals[p][2] * (vals.length <= 1? 1 : 0.91) : 1 * (vals.length <= 1? 1 : 0.91),
+                        flexShrink: 1,
+                        flexBasis: 0}}>
+                        {divComps}
+                    </div>
+                )
             }
 
             function SetCellComps(){
@@ -599,12 +796,15 @@ function ItemComponent(values){
                                         marginTop: (vals[i][10] == "None" || vals[i][10] == undefined || vals[i][10] == null) && scalingpresent? "20px" : "0px",
                                         paddingLeft:"5px",
                                         paddingRight:"5px",
+                                        paddingTop:"2px",
+                                        paddingBottom:"2px",
                                         flexGrow: vals[i][2] != undefined? vals[i][2] : 1,
                                         display:"flex",
                                         flexDirection:"column",
                                         justifyContent:"center",
                                         flexShrink:"1",
                                         flexBasis:"0",
+                                        textWrap:"wrap",
                                         borderStyle: vals[i][10] == "None"? "none" : "solid",
                                         borderColor: vals[i][10] == "None"? "none" : ColorPalette.GetScalingColor(vals[i][10],vals[i][12],1, false),
                                         borderWidth: vals[i][10] == "None"? "0px" : "3px",
@@ -617,11 +817,11 @@ function ItemComponent(values){
                                                 maskSize: "contain",
                                                 maskPosition:"center",
                                                 maskRepeat:"no-repeat",
-                                                width:"17px", 
-                                                height:"17px",
+                                                width:"19px", 
+                                                height:"19px",
                                                 alignSelf:"center",   
-                                                marginRight:"4px",           
-                                                backgroundColor: vals[i][4] == "Custom"? (vals[i][14] ?? "#000000") : ColorPalette.IconHexColors[vals[i][4]]}}/> : ""}
+                                                marginRight:"4px",        
+                                                backgroundColor: vals[i][4] == "Custom"? (vals[i][14] ?? "#000000") : ColorPalette.IconHexColors[vals[i][4] ?? "Weapon"]}}/> : ""}
                                             <h3 style=
                                             {{
                                                 fontSize:"20px",
@@ -630,7 +830,7 @@ function ItemComponent(values){
                                                 height:"auto",
                                                 fontFamily:"Retail",
                                                 fontWeight:"600",                          
-                                                lineHeight: "20px"
+                                                lineHeight: "20px",
                                             }} dangerouslySetInnerHTML={Utils.markdown((vals[i][5] != null && vals[i][5] != undefined)? vals[i][5].toString() : "")}></h3> 
                                         </div>
                                         <h3 style=
@@ -639,24 +839,21 @@ function ItemComponent(values){
                                             alignSelf:"center",
                                             color: ColorPalette.GetColor("Text"),
                                             height:"auto",
+                                            width:"115%",
                                             fontFamily:"Retail",
                                             fontWeight:"600",
                                             marginTop:"4.75px",
                                             textAlign:"center",
                                             lineHeight: "16px",
-                                            marginLeft: "5px",
-                                            marginRight: "5px",
                                         }} dangerouslySetInnerHTML={Utils.markdown((vals[i][6] != null && vals[i][6] != undefined)? vals[i][6].toString() : "")}></h3> 
                                         <h3 style=
                                         {{
-                                            fontSize:"15px",
+                                            fontSize:"100%",
                                             color: ColorPalette.GetColor("Text"),
                                             height:"auto",
                                             fontFamily:"Retail",
                                             fontWeight:"600",
                                             lineHeight: "22px",
-                                            marginLeft: "5px",
-                                            marginRight: "5px",
                                             textAlign:"center",
                                             opacity: vals[i][7] == "Conditional"? 0.7 : 1.0
                                         }} dangerouslySetInnerHTML={
@@ -668,38 +865,7 @@ function ItemComponent(values){
                         }
                         else{
                             cells.push(
-                                <div style={{
-                                    backgroundColor:ColorPalette.GetColor("StatTablePanel"),
-                                    height:"auto",
-                                    borderRadius:"3pt",
-                                    paddingTop:"8.5pt",
-                                    paddingBottom:"8.5pt",
-                                    borderTopLeftRadius: i > 0 || Object.values(ItemComponents)[values.placement - 1] == "StatTableRow" ? "0pt" : "3pt",
-                                    borderBottomLeftRadius: i > 0 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
-                                    borderTopRightRadius: i < vals.length - 1 || Object.values(ItemComponents)[values.placement - 1] == "StatTableRow"? "0pt" : "3pt",
-                                    borderBottomRightRadius: i < vals.length - 1 || Object.values(ItemComponents)[values.placement + 1] == "StatTableRow"? "0pt" : "3pt",
-                                    marginLeft: i == 0? "12.5pt" : "2pt",
-                                    marginRight: i == vals.length - 1? "12.5pt" : "2pt",
-                                    marginTop: (vals[i][10] == "None" || vals[i][10] == undefined || vals[i][10] == null) && scalingpresent? "20px" : "0px",
-                                    flexGrow: vals[i][2] != undefined? vals[i][2] : 1,
-                                    flexShrink: 1,
-                                    flexBasis: 0,
-                                    columnCount: vals[i][9] != undefined? vals[i][9] : 1,
-                                    columnWidth:"50%",
-                                }}>
-                                    <h3 style=
-                                    {{
-                                        fontSize:"18px",
-                                        alignSelf:"center",
-                                        color: ColorPalette.GetColor("Text"),
-                                        height:"auto",
-                                        fontFamily:"Retail",
-                                        fontWeight:"600",
-                                        paddingRight:"12pt",
-                                        paddingLeft:"12pt",
-                                        lineHeight: "22px"
-                                    }} dangerouslySetInnerHTML={Utils.markdown((vals[i][1] != null && vals[i][1] != undefined)? vals[i][1].toString() : "")}></h3>
-                                </div>
+                                CreateListRowDivs(vals[i][1] ?? "", vals[i][9] ?? 1, vals, i, scalingpresent)
                             )
                         }  
                     }

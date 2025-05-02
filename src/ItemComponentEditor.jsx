@@ -26,11 +26,11 @@ function ItemComponentEditor(values){
 
         if (enabled == false) return       
     
-        let bottomDiv = document.getElementById("bottomDiv"+values.index)
-        let topDiv = document.getElementById("topDiv"+values.index)
-        let arrow = document.getElementById("topDivArrow"+values.index)    
-        let upArrow = document.getElementById("moveUpArrow"+values.index)    
-        let downArrow = document.getElementById("moveDownArrow"+values.index)    
+        let bottomDiv = document.getElementById("bottomDiv"+values.index+values.itemID)
+        let topDiv = document.getElementById("topDiv"+values.index+values.itemID)
+        let arrow = document.getElementById("topDivArrow"+values.index+values.itemID)    
+        let upArrow = document.getElementById("moveUpArrow"+values.index+values.itemID)    
+        let downArrow = document.getElementById("moveDownArrow"+values.index+values.itemID)    
     
 
         if (justCreated == true){
@@ -112,9 +112,32 @@ function ItemComponentEditor(values){
                             <option value="Gold">Gold</option>
                             <option value="Custom">Custom</option>
                     </select><br/></label>,
-                    dict["CostType"] == "Custom"? <label>Cost Icon: <IconSelector width="50%" path="CostIcon" place={null} index={values.index} arrayPlace={3} defaultValue={dict["CostIcon"]}/><br/></label> : "",
-                    dict["CostType"] == "Custom"? <label>Cost Color: <input name="CostColor" type="color" defaultValue={dict["CostColor"]}/><br/></label> : "",
-                    dict["CostType"] == "Custom"? <label>Cost Icon Scale: <input name="CostIconScale" type="number" min={0} step={0.1} defaultValue={dict["CostIconScale"]}/><br/></label> : ""
+                    dict["CostType"] == "Custom"? <label>• Cost Icon: <IconSelector width="50%" path="CostIcon" place={null} index={values.index} arrayPlace={3} defaultValue={dict["CostIcon"]}/></label> : "",
+                    dict["CostType"] == "Custom"? <><input name="CostColor" type="color" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict["CostColor"]}/><br/></> : "",
+                    dict["CostType"] == "Custom"? <label>• Cost Icon Scale: <input name="CostIconScale" type="number" min={0} step={0.1} defaultValue={dict["CostIconScale"]}/><br/></label> : "",
+                    <label>Side Stat:
+                    <select name="SideStat" defaultValue={dict["SideStat"]} style={{pointerEvents:"auto", width:"50%"}}>
+                        <option value="None">None</option>
+                        <option value="Self">Self</option>
+                        <option value="Weapon">Weapon</option>
+                        <option value="Spirit">Spirit</option>
+                        <option value="Vitality">Vitality</option>
+                        <option value="Custom">Custom</option>
+                    </select><br/></label>,
+                    dict["SideStat"] != "None" && dict["SideStat"] != undefined && dict["SideStat"] != "Custom"? 
+                    <label>• Stat Tier:<select name="SideStatAmount" defaultValue={dict["SideStatAmount"]} style={{pointerEvents:"auto", width:"50%"}}>
+                        <option value="T1">Tier 1</option>
+                        <option value="T2">Tier 2</option>
+                        <option value="T3">Tier 3</option>
+                        <option value="T4">Tier 4</option>
+                        <option value="Custom">Custom</option>
+                    </select><br/></label> : "",
+                    dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <label>• Stat Icon: <IconSelector width="50%" path="SideStatCustomIcon" place={null} index={values.index} arrayPlace={3} defaultValue={dict["SideStatCustomIcon"]}/></label>: "",
+                    dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <><input name="SideStatCustomIconColor" type="color" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict["SideStatCustomIconColor"]}/><br/></> : "",
+                    dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <label>• Panel Color: <input name="SideStatPanelColor" type="color" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict["SideStatPanelColor"]}/><br/></label>: "",
+                    dict["SideStatAmount"] == "Custom" || dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <label>• Custom Stat: <input name="SideStatTopPanelText" maxLength="24" defaultValue={dict["SideStatTopPanelText"]}/><br/></label>: "",
+                    dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <label>• Bottom Panel Text: <input name="SideStatBottomPanelText" maxLength="24" defaultValue={dict["SideStatBottomPanelText"]}/><br/></label>: "",
+                    
                 ])
                 break
             case "Components":
@@ -215,14 +238,14 @@ function ItemComponentEditor(values){
     if (enabled == false) return
     else return(
         <>
-            <div className="topPartDiv" id={"topDiv"+values.index} onClick={ArrowButtonPress}>
+            <div className="topPartDiv" id={"topDiv"+values.index+values.itemID} onClick={ArrowButtonPress}>
                 <h4 className="NoHighlight" style={{marginRight:"auto"}}>{values.title}</h4>
-                <i className="DivArrowUp" id={"moveUpArrow"+values.index} onClick={e => MoveElement(e,0)}/> 
-                <i className="DivArrowDown" id={"moveDownArrow"+values.index} onClick={e => MoveElement(e,1)}/> 
-                <i className="topDivX NoHighlight" id={"topDivX"+values.index} onClick={element => DeleteElement(element)}>X</i>
-                <i className="topDivArrow" id={"topDivArrow"+values.index}/>              
+                <i className="DivArrowUp" id={"moveUpArrow"+values.index+values.itemID} onClick={e => MoveElement(e,0)}/> 
+                <i className="DivArrowDown" id={"moveDownArrow"+values.index+values.itemID} onClick={e => MoveElement(e,1)}/> 
+                <i className="topDivX NoHighlight" id={"topDivX"+values.index+values.itemID} onClick={element => DeleteElement(element)}>X</i>
+                <i className="topDivArrow" id={"topDivArrow"+values.index+values.itemID}/>              
             </div>
-            <div className="bottomPartDiv" id={"bottomDiv"+values.index}>
+            <div className="bottomPartDiv" id={"bottomDiv"+values.index+values.itemID}>
                 <form onChange={InputChanged}>
                 {partComponents}
                 </form>

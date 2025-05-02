@@ -94,6 +94,51 @@
   font-style: normal;
 }
 
+/* Radiance*/
+@font-face {
+  font-family: Radiance;
+  src: url('./fonts/Radiance/radiance-regular.otf') format(woff);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Radiance;
+  src: url('./fonts/Radiance/radiance-regularitalic.otf') format(woff);
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Radiance;
+  src: url('./fonts/Radiance/radiance-semibold.otf') format(woff);
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Radiance;
+  src: url('./fonts/Radiance/radiance-regularsemibolditalic.otf') format(woff);
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Radiance;
+  src: url('./fonts/Radiance/radiance-bold.otf') format(woff);
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Radiance;
+  src: url('./fonts/Radiance/radiance-bolditalic.otf') format(woff);
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+
 :root {
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -281,6 +326,28 @@ button:focus{
   font-weight: 600;
   color: #efdfbf;
   background-color: #1A1A1A;
+
+  justify-content: center;
+  align-items: center;
+
+  transition: border-color 0.2s ease-in-out;
+
+}
+.DarkButton.active{ 
+  padding: 8px;
+  margin: 4px;
+  outline: none;
+
+  border-width: 1px;
+  border-color: #efdfbf;
+  border-style:solid;
+  border-radius: 8px;
+  
+  font-family: Retail;
+  font-size: 1em;
+  font-weight: 600;
+  color: #1A1A1A;
+  background-color: #efdfbf;
 
   justify-content: center;
   align-items: center;

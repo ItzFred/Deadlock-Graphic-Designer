@@ -51,7 +51,12 @@ function InfoOverlay(values){
                 flexBasis:"100%",
                 flexDirection:"column"
             }}>
+                <div style={{display: "flex"}}>
                 <img src={websiteLogo} id="InfoWebsiteLogo" alt="Website logo" style={{width:"250px", margin:"15px"}}/>
+                <h3 style={{fontFamily:"Retail", fontSize:"24px", textAlign:"center",alignSelf:"flex-end", marginBottom:"20px", color:"#efdfbf"}}>
+                    V 1.02
+                </h3>
+                </div>
                 <div style={{display: "flex"}}>
                     {/* Markdown Guide */}
                     <div style={{margin:"5px", padding:"15px", background:"#1A1A1A",borderRadius:"7px"}}>
@@ -89,6 +94,7 @@ function InfoOverlay(values){
                             Site created by Fred. If you have any issues or suggestions, please DM me on Discord at @fredleon <br/>
                             <a href="https://github.com/ItzFred/Deadlock-Graphic-Designer"><img src={FredLogo} id="FredLogo" alt="Website logo" style={{width:"70px", marginTop:"20px"}}/></a> <br/>
                             This is my first project made in React, so I hope you can excuse me for not being the best programmer. But I had fun making it. <br/><br/>
+                            Thanks to ПумБа №2 for greatly helping me with Item Templates.<br/><br/>
                             Shoutout to Tryneus and his own graphic generator "Deadmock" for lending a helping hand.
                             
                         </h3>

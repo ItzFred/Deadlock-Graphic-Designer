@@ -33,8 +33,9 @@ h3.loadPanelButtonText{
 
     transition: width 0.2s ease-in-out;
 }
-div.loadPanelButton:hover .loadPanelButtonText{
-    width: 85%;
+
+div.loadPanelButton:hover .loadPanelButtonText.shift{
+    width: 78%;
 }
 
 
@@ -62,5 +63,32 @@ div.loadPanelButton:hover .DeleteButton:hover{
     color: #efdfbf;
 }
 .DeleteButton:focus{
+    color: #efdfbf;
+}
+
+.MoveLoadPanelButton{
+    width:20px;
+    min-width:20px;
+    height:20px;
+    min-height:20px;
+    align-self:flex-end;
+    position: absolute;
+    right: 45px;
+    border-radius: 100px;
+
+    border: 0px;
+
+    filter: opacity(0%);
+    transition: filter 0.2s ease-in-out;
+    color: #efdfbf;
+}
+div.loadPanelButton:hover .MoveLoadPanelButton{
+    filter: opacity(30%);
+}
+div.loadPanelButton:hover .MoveLoadPanelButton:hover{
+    filter: opacity(100%);
+    color: #efdfbf;
+}
+.MoveLoadPanelButton:focus{
     color: #efdfbf;
 }

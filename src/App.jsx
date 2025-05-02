@@ -12,25 +12,24 @@ import { domToPng } from 'modern-screenshot'
 import { saveAs } from 'file-saver'
 import InfoOverlay from './InfoOverlay.jsx'
 import LoadPanel from './LoadPanel.jsx'
-import DefaultItem from '../public/templateItems/DeadlockGraphicDesigner.json'
+import DefaultItem from '/public/templateItems/DeadlockGraphicDesigner.json'
 
 function App() {
 
-  const [co, SetComponents] = useState(Utils.GetCurrentItemDict()["itemComponents"] == undefined? 
+  const [storedComponents, SetStoredComponents] = useState(Utils.GetCurrentItemDict()["itemComponents"] == undefined? 
     Utils.SetCurrentItemDictKey("itemComponents", {}) : 
     Utils.GetCurrentItemDict()["itemComponents"])
   const [itemName, SetItemName] = useState("")
   const [selectedElement, SetSelectedElement] = useState(localStorage.getItem("selectedElement") === null? {} : localStorage.getItem("selectedElement"))
 
-  let components = []
-  let previewComponents = []
 
   useEffect(() => {
     function setEffectComponents() {
       SetItemName(Utils.GetCurrentItemDict()["ItemName"] == undefined ? "" : Utils.GetCurrentItemDict()["ItemName"])
-      SetComponents(Utils.GetCurrentItemDict()["itemComponents"]??{})    
+      SetStoredComponents(Utils.GetCurrentItemDict()["itemComponents"]??{})    
       var input = document.getElementById("ItemNameInput")
       input.value = Utils.GetCurrentItemDict()["ItemName"] == undefined? "Item" : Utils.GetCurrentItemDict()["ItemName"]
+      window.dispatchEvent(new Event("ComponentsUpdated"))
     }
 
     if (localStorage.getItem("SelectedItemComponent") === null) localStorage.setItem("SelectedItemComponent", "Title")
@@ -66,15 +65,31 @@ function App() {
 
   }, [])
   
-  Object.entries(co).map(([k, v]) => {
-    components.push(<ItemComponentEditor key={k} index={k} title={v[0]}/>)
-  })
 
-  var placementnum = 0
-  Object.entries(co).map(([k, v]) => {
-    previewComponents.push(<ItemComponent key={k} index={k} title={v[0]} placement={placementnum} listSize={Object.keys(co).length}/>)
-    placementnum++
-  })
+  function GetComponents(componentType = "work"){
+
+    var currentItem = localStorage.getItem("CurrentItem")
+
+    if (componentType == "work"){
+      let components = []
+      Object.entries(storedComponents).map(([k, v]) => {
+        components.push(<ItemComponentEditor key={k} index={k} itemID={currentItem} title={v[0]}/>)
+      })
+      window.dispatchEvent(new Event("ComponentsUpdated"))
+      return components
+    }
+    else if (componentType == "preview"){
+      let previewComponents = []
+      var placementnum = 0
+      Object.entries(storedComponents).map(([k, v]) => {
+        previewComponents.push(<ItemComponent key={k} index={k} itemID={currentItem} title={v[0]} placement={placementnum} listSize={Object.keys(storedComponents).length}/>)
+        placementnum++
+      })
+      window.dispatchEvent(new Event("ComponentsUpdated"))
+      return previewComponents
+    }
+  
+  }
 
   const handleChange = (e) => {
     SetSelectedElement(e.target.value)
@@ -82,7 +97,7 @@ function App() {
   };
 
   function onButtonClick(){
-    domToPng(document.querySelector("#CaptureArea"), {fixSvgXmlDecode:true, scale:4}).then(dataUrl => {
+    domToPng(document.getElementById("CaptureArea"), {fixSvgXmlDecode:true, scale:4}).then(dataUrl => {
       saveAs(dataUrl, (Utils.GetCurrentItemDict()["ItemName"]?? "Item") + ".png")
     })
   }
@@ -119,7 +134,7 @@ function App() {
     var downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href",     dataStr);
     var fileName = Utils.GetCurrentItemDict()["ItemName"]
-    downloadAnchorNode.setAttribute("download", (fileName ?? "ItemName") + ".json");
+    downloadAnchorNode.setAttribute("download", (fileName ?? "ItemName") + ".txt");
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
@@ -128,28 +143,34 @@ function App() {
   function ImportJSON(){
     var input = document.createElement("input")
     input.type = "file"
+    input.multiple = true
     input.onchange = e => {
-      var file = input.files[0]
-      if (file){
-        var reader = new FileReader()
-        reader.readAsText(file, "UTF-8")
-        reader.onload = evt => {
-          var newCurrentItem = crypto.randomUUID()
-          localStorage.setItem("CurrentItem", newCurrentItem)
-          localStorage.setItem(newCurrentItem, evt.target.result)
-
-          SetItemName(Utils.GetCurrentItemDict()["ItemName"] ?? "")
-          window.dispatchEvent(new Event("itemComponent"));
-
-          if (localStorage.getItem("Items") == null) localStorage.setItem("Items", '['+JSON.stringify(newCurrentItem)+']')
-          else {
-            var items = JSON.parse(localStorage.getItem("Items"))
-            if (!items.includes(newCurrentItem)) items.push(newCurrentItem)
-            localStorage.setItem("Items", JSON.stringify(items))
+      for (var i = 0; i < input.files.length; i++){
+        var file = input.files[i]
+        if (file){
+          var reader = new FileReader()
+          reader.readAsText(file, "UTF-8")
+          reader.onload = evt => {
+  
+            var newCurrentItem = crypto.randomUUID()
+            var itemData = Utils.JumblePartNames(JSON.parse(evt.target.result))
+  
+            localStorage.setItem("CurrentItem", newCurrentItem)
+            localStorage.setItem(newCurrentItem, JSON.stringify(itemData))
+  
+            SetItemName(Utils.GetCurrentItemDict()["ItemName"] ?? "")
+            window.dispatchEvent(new Event("itemComponent"));
+  
+            if (localStorage.getItem("Items") == null) localStorage.setItem("Items", '['+JSON.stringify(newCurrentItem)+']')
+            else {
+              var items = JSON.parse(localStorage.getItem("Items"))
+              if (!items.includes(newCurrentItem)) items.push(newCurrentItem)
+              localStorage.setItem("Items", JSON.stringify(items))
+            }
           }
-        }
-        reader.onerror = evt => {
-          alert("Couldn't Read file")
+          reader.onerror = evt => {
+            alert("Couldn't Read file")
+          }
         }
       }
     }
@@ -158,16 +179,15 @@ function App() {
 
   function CreateNewitem(){
     localStorage.setItem("CurrentItem", crypto.randomUUID())
-    SetComponents({})
+    SetStoredComponents({})
 
-    components = []
-    previewComponents = []
     window.dispatchEvent(new Event("itemComponent"));
     SaveItem("")
   }
 
   function CopyItem(){
     var itemData = Utils.GetCurrentItemDict()
+    itemData = Utils.JumblePartNames(itemData)
 
     var newCurrentItem = crypto.randomUUID()
     localStorage.setItem("CurrentItem", newCurrentItem)
@@ -219,11 +239,11 @@ function App() {
                 </select>
               </form>
             </div>
-            {components}
+            {GetComponents("work")}
           </div>
           <div class="previewArea" id="previewArea">
             <div id="CaptureArea">
-            {previewComponents}
+            {GetComponents("preview")}
             <button className='DarkButton' style={{
               position:"absolute",
               width:"100px",

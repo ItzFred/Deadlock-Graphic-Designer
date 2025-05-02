@@ -7,8 +7,8 @@ import HealthScalingIcon from "./assets/icons/HealthScaling.svg"
 import * as React from "react";
 import { ReactSVG } from "react-svg";
 import { Suspense, lazy } from "react";
+import './index.css'
 
-import Icon from "./assets/icons/icon_soul.svg?react"
 
 
 class Utils{
@@ -99,7 +99,7 @@ class Utils{
         return ""
     }
 
-    static markdown(text) {
+    static markdown(text, palette = null) {
         if (text == undefined || text == null || text == "") return {__html: ""}
 
         var bold = /\*\*(.*?)\*\*/gm;
@@ -118,9 +118,9 @@ class Utils{
         }    
 
         var lightColor = "#ffffff"
-        var darkColor = ColorPalette.GetColor("DarkText")
-        var subtitleColor = ColorPalette.GetColor("SubtitleText")
-        var symbols = /([&?=.@$%!^":;'+/\-])/gm;
+        var darkColor = ColorPalette.GetColor("DarkText", palette == null? null : palette, palette == "Custom"? Utils.GetCurrentItemDict()["CustomColor"] : null)
+        var subtitleColor = ColorPalette.GetColor("SubtitleText", palette == null? null : palette, palette == "Custom"? Utils.GetCurrentItemDict()["CustomColor"] : null)
+        var symbols = /([&?=.@$%!^":;+/\-\\])/gm;
 
         var newtext = ""
 
@@ -146,6 +146,22 @@ class Utils{
     }
 
 
+    static JumblePartNames(dict){
+        var dictCopy = dict
+        var compNames = Object.keys(dictCopy["itemComponents"])
+        Object.entries(dictCopy["itemComponents"]).map(([k, v]) => {
+            var newName = crypto.randomUUID()
+            var oldName = k
+            var componentData = dictCopy["ItemComponent_"+k]
+
+            dictCopy["itemComponents"]["Part_"+v+"_"+newName] = v
+            delete dictCopy["itemComponents"][k]
+
+            dictCopy["ItemComponent_Part_"+v+"_"+newName] = componentData
+            delete dictCopy["ItemComponent_"+k]
+        })
+        return dictCopy
+    }
 }
 
 export default Utils

@@ -18,7 +18,7 @@ const IconSelector = (values) => {
             "Stat/Silence","Stat/Stun","Stat/Invisible","Stat/Vision",],
         "Weapon Items" : ["Weapon/T1/basicMag","Weapon/T1/closeQuarters","Weapon/T1/headshotBooster","Weapon/T1/highVelocityMag","Weapon/T1/hollowPointWard","Weapon/T1/monsterRounds","Weapon/T1/rapidRounds","Weapon/T1/restorativeShot",
             "Weapon/T2/berserker","Weapon/T2/fleetfoot","Weapon/T2/kineticDash","Weapon/T2/longRange","Weapon/T2/meleeCharge","Weapon/T2/mysticShot","Weapon/T2/slowingBullets","Weapon/T2/soulShredderBullets","Weapon/T2/swiftStriker",
-            "Weapon/T3/alchemicalFire","Weapon/T3/burstFire","Weapon/T3/escalatingResilience","Weapon/T3/headhunter","Weapon/T3/heroicAura","Weapon/T3/intensifyingMagazine","Weapon/T3/pointBlank","Weapon/T3/pristineEmblem","Weapon/T3/sharpshooter","Weapon/T3/teslaBullets","Weapon/T3/titanicMagazine","Weapon/T3/toxicBullets",
+            "Weapon/T3/alchemicalFire","Weapon/T3/burstFire","Weapon/T3/escalatingResilience","Weapon/T3/headhunter","Weapon/T3/heroicAura","Weapon/T3/intensifyingMagazine","Weapon/T3/pointBlank","Weapon/T3/pristineEmblem","Weapon/T3/sharpshooter","Weapon/T3/SpellslingerHeadshots","Weapon/T3/teslaBullets","Weapon/T3/titanicMagazine","Weapon/T3/toxicBullets",
             "Weapon/T4/cripplingHeadshot","Weapon/T4/frenzy","Weapon/T4/glassCannon","Weapon/T4/luckyShot","Weapon/T4/ricochet","Weapon/T4/shadowWeave","Weapon/T4/silencer","Weapon/T4/spiritualOverflow","Weapon/T4/vampiricBurst"
         ],
         "Vitality Items" : ["Vitality/T1/enduringSpirit","Vitality/T1/extraHealth","Vitality/T1/extraRegen","Vitality/T1/extraStamina","Vitality/T1/healingRite","Vitality/T1/meleeLifesteal","Vitality/T1/sprintBoots",
@@ -29,7 +29,7 @@ const IconSelector = (values) => {
         ],
         "Spirit Items" : ["Spirit/T1/ammoScavenger","Spirit/T1/extraCharge","Spirit/T1/extraSpirit","Spirit/T1/infuser","Spirit/T1/mysticBurst","Spirit/T1/mysticReach","Spirit/T1/spiritStrike",
             "Spirit/T2/bulletResistShredder","Spirit/T2/coldFront","Spirit/T2/decay","Spirit/T2/durationExtender","Spirit/T2/improvedCooldown","Spirit/T2/mysticVulnerability","Spirit/T2/quicksilverReload","Spirit/T2/slowingHex","Spirit/T2/suppressor","Spirit/T2/witheringWhip",
-            "Spirit/T3/etherealShift","Spirit/T3/improvedBurst","Spirit/T3/improvedReach","Spirit/T3/improvedSpirit","Spirit/T3/knockdown","Spirit/T3/mysticSlow","Spirit/T3/rapidRecharge","Spirit/T3/silenceGlyph","Spirit/T3/superiorCooldown","Spirit/T3/superiorDuration","Spirit/T3/surgeOfPower","Spirit/T3/tormentPulse",
+            "Spirit/T3/ArcaneSurge","Spirit/T3/etherealShift","Spirit/T3/improvedBurst","Spirit/T3/improvedReach","Spirit/T3/improvedSpirit","Spirit/T3/knockdown","Spirit/T3/mysticSlow","Spirit/T3/rapidRecharge","Spirit/T3/silenceGlyph","Spirit/T3/superiorCooldown","Spirit/T3/superiorDuration","Spirit/T3/surgeOfPower","Spirit/T3/tormentPulse",
             "Spirit/T4/boundlessSpirit","Spirit/T4/curse","Spirit/T4/divinersKevlar","Spirit/T4/echoShard","Spirit/T4/escalatingExposure","Spirit/T4/magicCarpet","Spirit/T4/mysticReverb","Spirit/T4/refresher",
         ],
         "Custom Items" : ["CustomItems/HeartTaker","CustomItems/LightningFists"]
