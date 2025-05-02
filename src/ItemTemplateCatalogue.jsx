@@ -200,7 +200,7 @@ class ItemTemplateCatalogue {
         "Combat Barrier" : CombatBarrier,
         "Debuff Reducer" : DebuffReducer,
         "Divine Barrier" : DivineBarrier,
-        "Enchanters Barrier" : EnchantersBarrier,
+        "Enchanter's Barrier" : EnchantersBarrier,
         "Enduring Speed" : EnduringSpeed,
         "Healbane" : Healbane,
         "Healing Booster" : HealingBooster,
@@ -288,7 +288,7 @@ class ItemTemplateCatalogue {
         },
         "Vitality" : {
             "Enduring Spirit":["Vitality"], "Extra Health":["Vitality"], "Extra Regen":["Vitality"], "Extra Stamina":["Vitality"], "Healing Rite":["Vitality"], "Melee Lifesteal":["Vitality"], "Sprint Boots":["Vitality"], 
-            "Bullet Armor":["Vitality"], "Bullet Lifesteal":["Vitality"], "Combat Barrier":["Vitality"], "Debuff Reducer":["Vitality"], "Divine Barrier":["Vitality"], "Enchanters Barrier":["Vitality"], "Enduring Speed":["Vitality"], "Healbane":["Vitality"], "Healing Booster":["Vitality"], "Healing Nova":["Vitality"], "Reactive Barrier":["Vitality"], "Restorative Locket":["Vitality"], "Return Fire":["Vitality"], "Spirit Armor":["Vitality"], "Spirit Lifesteal":["Vitality"],          
+            "Bullet Armor":["Vitality"], "Bullet Lifesteal":["Vitality"], "Combat Barrier":["Vitality"], "Debuff Reducer":["Vitality"], "Divine Barrier":["Vitality"], "Enchanter's Barrier":["Vitality"], "Enduring Speed":["Vitality"], "Healbane":["Vitality"], "Healing Booster":["Vitality"], "Healing Nova":["Vitality"], "Reactive Barrier":["Vitality"], "Restorative Locket":["Vitality"], "Return Fire":["Vitality"], "Spirit Armor":["Vitality"], "Spirit Lifesteal":["Vitality"],          
             "Debuff Remover":["Vitality"], "Fortitude":["Vitality"], "Improved Bullet Armor":["Vitality"], "Improved Spirit Armor":["Vitality"], "Lifestrike":["Vitality"], "Majestic Leap":["Vitality"], "Metal Skin":["Vitality"], "Rescue Beam":["Vitality"], "Superior Stamina":["Vitality"], 
             "Colossus":["Vitality"], "Inhibitor":["Vitality"], "Leech":["Vitality"], "Phantom Strike":["Vitality"], "Siphon Bullets":["Vitality"], "Unstoppable":["Vitality"], "Veil Walker":["Vitality"], 
         },

@@ -139,9 +139,9 @@ function ItemComponent(values){
                     case "Icon" : 
                         if (palette == "None") return ""
                         else if (palette == "Self") return ""
-                        else if (palette == "Weapon") return "./public/publicIcons/Stat/WeaponItem.svg"
-                        else if (palette == "Spirit") return "./public/publicIcons/Stat/spiritPower.svg"
-                        else if (palette == "Vitality") return "./public/publicIcons/Stat/VitalityItem.svg"
+                        else if (palette == "Weapon") return "./publicIcons/Stat/WeaponItem.svg"
+                        else if (palette == "Spirit") return "./publicIcons/Stat/spiritPower.svg"
+                        else if (palette == "Vitality") return "./publicIcons/Stat/VitalityItem.svg"
                         else return icon
                     case "IconColor" :
                         if (palette == "None") return ""
