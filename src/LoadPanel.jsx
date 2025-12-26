@@ -43,23 +43,26 @@ function LoadPanel(){
             var newArr = arr.slice((10 * num), Math.min(10 * (num + 1), arr.length))
             newArr.forEach(e => {
                 var color = JSON.parse(localStorage.getItem(e))["ColorPalette"]
+                var customColor = JSON.parse(localStorage.getItem(e))["CustomColor"] == undefined ? "#ffffff" : JSON.parse(localStorage.getItem(e))["CustomColor"]
                 returnComps.push(
                     <div className="loadPanelButton" onClick={elem => {EditItem(e); elem.stopPropagation()}} style={{
                         backgroundColor: color == undefined? ColorPalette.GetColor("TitlePanel", "Weapon") : 
-                            ColorPalette.GetColor("TitlePanel", color, color == "Custom"? JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff"  : null),
+                            ColorPalette.GetColor("TitlePanel", color, color == "Custom"? customColor  : null),
                         margin:"2px",
-                        style:"flex"
+                        marginTop:"2px",
+                        minHeight:"50px",
+                        style:"flex",
                     }}>
                         <h3 className="loadPanelButtonText shift" style={{
                             color: ColorPalette.GetColor("TitleText"),
                             textShadow:"2pt 2pt 0pt "+ (color == undefined? ColorPalette.GetColor("TitleShadowText", "Weapon") : 
-                            ColorPalette.GetColor("TitleShadowText", color, color == "Custom"? JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff" : null))
-                        }} dangerouslySetInnerHTML={Utils.markdown(JSON.parse(localStorage.getItem(e))["ItemName"])}/>
+                            ColorPalette.GetColor("TitleShadowText", color, color == "Custom"? customColor : null))
+                        }} dangerouslySetInnerHTML={Utils.markdown(JSON.parse(localStorage.getItem(e))["ItemName"], color, customColor)}/>
                         <div style={{display:"flex", flexDirection:"column"}}>
-                            <MoveLoadPanelButton direction="up" item={e} col={color} customColor={JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff"}/>
-                            <MoveLoadPanelButton direction="down" item={e} col={color} customColor={JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff"}/>
+                            <MoveLoadPanelButton direction="up" item={e} col={color} customColor={customColor}/>
+                            <MoveLoadPanelButton direction="down" item={e} col={color} customColor={customColor}/>
                         </div>                     
-                        <RemoveButton item={e} col={color} customColor={JSON.parse(localStorage.getItem(e))["CustomColor"] ?? "#ffffff"}/>
+                        <RemoveButton item={e} col={color} customColor={customColor}/>
                     </div>)
             });
 
@@ -86,7 +89,7 @@ function LoadPanel(){
                             color: ColorPalette.GetColor("TitleText"),
                             textShadow:"2pt 2pt 0pt "+ (color == undefined? ColorPalette.GetColor("TitleShadowText", "Weapon") : 
                             ColorPalette.GetColor("TitleShadowText", color, color == "Custom"? v[1] ?? "#ffffff" : null))
-                        }} dangerouslySetInnerHTML={Utils.markdown(k)}/>
+                        }} dangerouslySetInnerHTML={Utils.markdown(k, color, v[1])}/>
                     </div>)
             })
 
@@ -112,7 +115,7 @@ function LoadPanel(){
             Object.keys(arr).forEach(key => {
                 divs.push(
                     <div style={{display:"flex",marginLeft:"10px", marginRight:"10px", flexDirection:"column", width:"100%", height:"100%"}}>
-                        <h3 style={{fontFamily:"Retail", fontSize:"42px", color:ColorPalette.GetColor("TitleText")}}>{key}</h3> 
+                        <h3 style={{fontFamily:"ValveOccult", fontSize:"42px", color:ColorPalette.GetColor("TitleText")}}>{key}</h3> 
                         <div style={{display:"flex", flexDirection:"row", flex: "1 0 auto"}}>
                             {GetDivs(key)}
                         </div>
@@ -125,7 +128,12 @@ function LoadPanel(){
         if (tab == "Default" || tab == undefined || tab == null){
             for (var i = 0; i <= Math.floor(arr.length / 10) ; i++){
                 comps.push(
-                    <div style={{display:"flex", flexDirection:"column", height:"100%"}}>
+                    <div style={{display:"flex", 
+                        flexDirection:"column", 
+                        height:"100%",                        
+                        marginTop:"17px",
+                        marginRight: i == Math.floor(arr.length / 10)? "17px" : "2px",
+                        marginLeft: i == 0? "17px": "2px",}}>
                         {GetCompButtons(i)}
                     </div>
                 )
@@ -200,7 +208,7 @@ function LoadPanel(){
                 borderRadius: "8px",
             }}>
                 <div style={{display:"flex"}}>
-                    <h3 style={{color:"#efdfbf", marginRight:"20px"}}>Select item</h3>
+                    <h3 style={{color:"#efdfbf", marginRight:"20px", fontFamily:"ValveOccult"}}>Select item</h3>
                     <button class={localStorage.getItem("CurrentLoadTab") == "Default" || localStorage.getItem("CurrentLoadTab") == undefined? "DarkButton active" : "DarkButton"} onClick={e => {SetTab("Default"); e.stopPropagation()}} style={{height:"50px", width:"100px", alignSelf:"center"}}>Your Items</button>
                     <button class={localStorage.getItem("CurrentLoadTab") == "Templates"? "DarkButton active" : "DarkButton"} onClick={e => {SetTab("Templates"); e.stopPropagation()}} style={{height:"50px", width:"100px", alignSelf:"center"}}>Templates</button>
                 </div>

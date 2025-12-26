@@ -8,7 +8,7 @@ class ColorPalette{
         DarkText : "#b5a599",
         SubtitleText : "#988169",
         PassiveText : "#c4b49e",
-        TitlePanel : "#c97a03",
+        TitlePanel : "#be7718",
         TitlePanelStatTop : "#a36202",
         TitlePanelStatBottom : "#885101",
         TitlePanelStatIcon : "#ec981a",
@@ -32,12 +32,12 @@ class ColorPalette{
 
     static VitalityColors = {
         TitleText : "#ffefd7",
-        TitleShadowText : "#5b8a15",
+        TitleShadowText : "#66771e",
         Text : "#cdcdcd",
         DarkText : "#a3af99",
         SubtitleText : "#7c8b5f",
         PassiveText : "#bfb79f",
-        TitlePanel : "#659818",
+        TitlePanel : "#6d8522",
         TitlePanelStatTop : "#507a11",
         TitlePanelStatBottom : "#41650c",
         TitlePanelStatIcon : "#7cbb1e",
@@ -61,12 +61,12 @@ class ColorPalette{
 
     static SpiritColors = {
         TitleText : "#ffefd7",
-        TitleShadowText : "#7e4ea4",
+        TitleShadowText : "#aa5397",
         Text : "#cdcdcd",
-        DarkText : "#a99db7",
+        DarkText : "#b8b8b8",
         SubtitleText : "#897695",
         PassiveText : "#c1b2a8",
-        TitlePanel : "#8b56b4",
+        TitlePanel : "#b75da3",
         TitlePanelStatTop : "#704491",
         TitlePanelStatBottom : "#5c3778",
         TitlePanelStatIcon : "#c88cf8",
@@ -91,12 +91,12 @@ class ColorPalette{
     static CustomColors = {
 
         TitleText : "#fbefd7",
-        TitleShadowText : "#c0c0c0",
+        TitleShadowText : "#dddddd",
         Text : "#f7f3f0",
         DarkText : "#c8c0bc",
         SubtitleText : "#A6A6A6",
         PassiveText : "#9a948e",
-        TitlePanel : "#e5e5e5",
+        TitlePanel : "#ffffff",
         TitlePanelStatTop : "#bfc0c0",
         TitlePanelStatBottom : "#9b9d9e",
         TitlePanelStatIcon : "#ffffff",
@@ -133,9 +133,37 @@ class ColorPalette{
         Vitality : "#00ff9a",
         Spirit : "#ce91ff",
         Gray : "#a9a9a9",
+        White : "#ffffff",
         Soul : "#9affd6",
         Red : "#ff6c69",
         Yellow : "#ffd400"
+    }
+
+    static TransparentCompColors = {
+        Weapon : {
+            CooldownPassive : "rgba(0, 0, 0, 0.35)",
+            CooldownActive : "rgba(0, 0, 0, 0.4)",
+            Upgrade : "rgba(97, 58, 53, 0.41)",
+            Cell : "rgba(0,0,0,0.25)",
+        },
+        Vitality : {
+            CooldownPassive : "rgba(17, 14, 7, 0.35)",
+            CooldownActive : "rgba(0, 0, 0, 0.4)",
+            Upgrade : "rgba(88, 71, 60, 0.56)",
+            Cell : "rgba(17,14,7,0.3)",
+        },
+        Spirit : {
+            CooldownPassive : "rgba(17, 14, 7, 0.4)",
+            CooldownActive : "rgba(0, 0, 0, 0.4)",
+            Upgrade : "rgba(61, 37, 21, 0.56)",
+            Cell : "rgba(17,14,7,0.25)",
+        },
+        Custom : {
+            CooldownPassive : "rgba(0,0,0,0.3)",
+            CooldownActive : "rgba(0,0,0,0.4)",
+            Upgrade : "rgba(0,0,0,0.5)",
+            Cell : "rgba(0,0,0,0.25)",
+        },
     }
 
     static GetIconColor(colorName){
@@ -150,6 +178,7 @@ class ColorPalette{
             case "Weapon": if (Panel) return "rgba(128, 85, 15, "+opacity+")"; else return "rgba(128, 85, 15, "+opacity+")"
             case "Melee": if (Panel) return "rgba(128, 85, 15, "+opacity+")"; else return "rgba(128, 85, 15, "+opacity+")"
             case "Health": if (Panel) return "rgba(60, 112, 43, "+opacity+")"; else return "rgba(60, 112, 43, "+opacity+")"
+            case "Boon": if (Panel) return "rgba(33, 122, 104, "+opacity+")"; else return "rgba(33, 122, 104, "+opacity+")"
         }
         if (CustomColor == null || CustomColor == undefined) return "rgba(0, 0, 0, 0)"
         var color = Utils.hexToRgb(CustomColor)

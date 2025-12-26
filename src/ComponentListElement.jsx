@@ -122,6 +122,7 @@ function ComponentListElement(values){
                                     <option value="Vitality">Vitality</option>
                                     <option value="Spirit">Spirit</option>
                                     <option value="Gray">Gray</option>
+                                    <option value="White">White</option>
                                     <option value="Soul">Soul</option>
                                     <option value="Red">Red</option>
                                     <option value="Yellow">Yellow</option>
@@ -145,6 +146,7 @@ function ComponentListElement(values){
                                     <option value="Melee">Melee</option>
                                     <option value="Weapon">Weapon</option>
                                     <option value="Health">Health</option>
+                                    <option value="Boon">Boon</option>
                                     <option value="Custom">Custom</option>
                             </select> </label>
                             <div style={{display:dict[values.path]["A"+values.place][10] == "Custom"? "block" : "none", flexDirection:"row"}}>

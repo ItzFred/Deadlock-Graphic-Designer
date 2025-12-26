@@ -28,7 +28,7 @@ function ItemComponentEditor(values){
     
         let bottomDiv = document.getElementById("bottomDiv"+values.index+values.itemID)
         let topDiv = document.getElementById("topDiv"+values.index+values.itemID)
-        let arrow = document.getElementById("topDivArrow"+values.index+values.itemID)    
+        //let arrow = document.getElementById("topDivArrow"+values.index+values.itemID)    
         let upArrow = document.getElementById("moveUpArrow"+values.index+values.itemID)    
         let downArrow = document.getElementById("moveDownArrow"+values.index+values.itemID)    
     
@@ -37,13 +37,13 @@ function ItemComponentEditor(values){
             if (open){
                 bottomDiv.style.animation = ""
                 topDiv.style.animation = ""
-                arrow.style.animation = ""
+                //arrow.style.animation = ""
                 SetCreation(false)
             }
             else{
                 bottomDiv.style.animation = "unset"
                 topDiv.style.animation = "unset"
-                arrow.style.animation = "unset"
+                //arrow.style.animation = "unset"
             }
         }
 
@@ -58,9 +58,9 @@ function ItemComponentEditor(values){
             topDiv.style.borderBottomRightRadius = "0px"
             topDiv.style.color = "#212020"
 
-            arrow.style.animationName = "OpenArrow"
-            arrow.style.transform = "rotate(90deg)"
-            arrow.style.borderLeftColor = "#212020"
+            //arrow.style.animationName = "OpenArrow"
+            //arrow.style.transform = "rotate(90deg)"
+            //arrow.style.borderLeftColor = "#212020"
 
             upArrow.style.borderLeftColor = "#212020"
             downArrow.style.borderLeftColor = "#212020"
@@ -76,9 +76,9 @@ function ItemComponentEditor(values){
             topDiv.style.borderBottomRightRadius = "8px"
             topDiv.style.color = "#efdfbf"
 
-            arrow.style.animationName = "CloseArrow"
-            arrow.style.transform = "rotate(0deg)"
-            arrow.style.borderLeftColor = "#efdfbf" 
+            //arrow.style.animationName = "CloseArrow"
+            //arrow.style.transform = "rotate(0deg)"
+            //arrow.style.borderLeftColor = "#efdfbf" 
 
             upArrow.style.borderLeftColor = "#efdfbf" 
             downArrow.style.borderLeftColor = "#efdfbf" 
@@ -115,28 +115,6 @@ function ItemComponentEditor(values){
                     dict["CostType"] == "Custom"? <label>• Cost Icon: <IconSelector width="50%" path="CostIcon" place={null} index={values.index} arrayPlace={3} defaultValue={dict["CostIcon"]}/></label> : "",
                     dict["CostType"] == "Custom"? <><input name="CostColor" type="color" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict["CostColor"]}/><br/></> : "",
                     dict["CostType"] == "Custom"? <label>• Cost Icon Scale: <input name="CostIconScale" type="number" min={0} step={0.1} defaultValue={dict["CostIconScale"]}/><br/></label> : "",
-                    <label>Side Stat:
-                    <select name="SideStat" defaultValue={dict["SideStat"]} style={{pointerEvents:"auto", width:"50%"}}>
-                        <option value="None">None</option>
-                        <option value="Self">Self</option>
-                        <option value="Weapon">Weapon</option>
-                        <option value="Spirit">Spirit</option>
-                        <option value="Vitality">Vitality</option>
-                        <option value="Custom">Custom</option>
-                    </select><br/></label>,
-                    dict["SideStat"] != "None" && dict["SideStat"] != undefined && dict["SideStat"] != "Custom"? 
-                    <label>• Stat Tier:<select name="SideStatAmount" defaultValue={dict["SideStatAmount"]} style={{pointerEvents:"auto", width:"50%"}}>
-                        <option value="T1">Tier 1</option>
-                        <option value="T2">Tier 2</option>
-                        <option value="T3">Tier 3</option>
-                        <option value="T4">Tier 4</option>
-                        <option value="Custom">Custom</option>
-                    </select><br/></label> : "",
-                    dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <label>• Stat Icon: <IconSelector width="50%" path="SideStatCustomIcon" place={null} index={values.index} arrayPlace={3} defaultValue={dict["SideStatCustomIcon"]}/></label>: "",
-                    dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <><input name="SideStatCustomIconColor" type="color" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict["SideStatCustomIconColor"]}/><br/></> : "",
-                    dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <label>• Panel Color: <input name="SideStatPanelColor" type="color" style={{height:"40px", position:"relative", top:"5px"}} defaultValue={dict["SideStatPanelColor"]}/><br/></label>: "",
-                    dict["SideStatAmount"] == "Custom" || dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <label>• Custom Stat: <input name="SideStatTopPanelText" maxLength="24" defaultValue={dict["SideStatTopPanelText"]}/><br/></label>: "",
-                    dict["SideStat"] == "Custom" || (Utils.GetCurrentItemDict()["ColorPalette"] == "Custom" & dict["SideStat"] == "Self")? <label>• Bottom Panel Text: <input name="SideStatBottomPanelText" maxLength="24" defaultValue={dict["SideStatBottomPanelText"]}/><br/></label>: "",
                     
                 ])
                 break
@@ -235,15 +213,24 @@ function ItemComponentEditor(values){
         element.stopPropagation();
     }
 
+    function GetCustomTitle(title){
+        switch(title){
+            case "StatTableRow": return "Stat Table"
+            case "Components": return "Upgrades From"
+            case "ComponentOf": return "Upgrades To"
+        }
+        return title
+    }
+
     if (enabled == false) return
     else return(
         <>
             <div className="topPartDiv" id={"topDiv"+values.index+values.itemID} onClick={ArrowButtonPress}>
-                <h4 className="NoHighlight" style={{marginRight:"auto"}}>{values.title}</h4>
-                <i className="DivArrowUp" id={"moveUpArrow"+values.index+values.itemID} onClick={e => MoveElement(e,0)}/> 
-                <i className="DivArrowDown" id={"moveDownArrow"+values.index+values.itemID} onClick={e => MoveElement(e,1)}/> 
+                <h4 className="NoHighlight" style={{marginRight:"auto", alignSelf:"center"}}>{GetCustomTitle(values.title)}</h4>
+                <i className="DivArrowUp" style={{marginRight:"-50px", marginTop:"25px"}} id={"moveUpArrow"+values.index+values.itemID} onClick={e => MoveElement(e,0)}/> 
+                <i className="DivArrowDown" style={{marginTop:"-25px"}} id={"moveDownArrow"+values.index+values.itemID} onClick={e => MoveElement(e,1)}/> 
                 <i className="topDivX NoHighlight" id={"topDivX"+values.index+values.itemID} onClick={element => DeleteElement(element)}>X</i>
-                <i className="topDivArrow" id={"topDivArrow"+values.index+values.itemID}/>              
+                             
             </div>
             <div className="bottomPartDiv" id={"bottomDiv"+values.index+values.itemID}>
                 <form onChange={InputChanged}>

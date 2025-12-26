@@ -137,7 +137,12 @@
   font-style: italic;
 }
 
-
+@font-face {
+  font-family: ValveOccult;
+  src: url('./fonts/ValveOccult/valveoccult-semibold.ttf') format(woff);
+  font-weight: 700;
+  font-style: normal;
+}
 
 :root {
   color-scheme: light dark;
@@ -506,7 +511,7 @@ div.topPartDiv{
 
   color: #efdfbf; 
   font-size: 26px;
-  font-family: Forevs;
+  font-family: ValveOccult;
 
   display: -webkit-box;
   display: -ms-flexbox;

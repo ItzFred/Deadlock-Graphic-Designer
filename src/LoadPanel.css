@@ -8,11 +8,15 @@ div.loadPanelButton{
     display: flex;
 
     filter: brightness(100%);
-    transition: filter 0.2s ease-in-out;
+    transform: scale(1);
+    transition: filter 0.2s ease-in-out, transform 0.2s ease-in-out, z-index 0.2s ease-in-out;
+    z-index: 1;
     overflow: hidden;
 }
 div.loadPanelButton:hover{
     filter: brightness(150%);
+    transform: scale(1.1) rotate(2deg);
+    z-index: 10;
 }
 
 .loadPanelEditButton{
@@ -23,11 +27,11 @@ div.loadPanelButton:hover{
 }
 
 h3.loadPanelButtonText{
-    font-size:22px;
+    font-size:25px;
     align-self:center;
     height:auto;
     width: 100%;
-    font-family: Retail;
+    font-family: ValveOccult;
     font-weight:700;                        
     line-height: 20px;
 

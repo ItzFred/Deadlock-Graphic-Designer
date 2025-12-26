@@ -230,12 +230,12 @@ function App() {
               <form>
                 <select name="ComponentType" onChange={handleChange} defaultValue={localStorage.getItem("SelectedItemComponent")}>
                   <option value="Title">Title</option>
-                  <option value="Components">Components</option>
+                  <option value="Components">Upgrades From</option>
                   <option value="Stats">Stats</option>
                   <option value="Cooldown">Cooldown</option>
                   <option value="Description">Description</option>
-                  <option value="StatTableRow">Stat Table Row</option>
-                  <option value="ComponentOf">Component Of</option>
+                  <option value="StatTableRow">Stat Table</option>
+                  <option value="ComponentOf">Upgrades To</option>
                 </select>
               </form>
             </div>

@@ -4,6 +4,7 @@ import SpiritScalingIcon from "./assets/icons/SpiritScaling.svg"
 import WeaponScalingIcon from "./assets/icons/WeaponScaling.svg"
 import MeleeScalingIcon from "./assets/icons/MeleeScaling.svg"
 import HealthScalingIcon from "./assets/icons/HealthScaling.svg"
+import BoonScalingIcon from "./assets/icons/BoonScaling.svg"
 import * as React from "react";
 import { ReactSVG } from "react-svg";
 import { Suspense, lazy } from "react";
@@ -91,15 +92,16 @@ class Utils{
 
     static GetScalingIcon(scalingName){
         switch (scalingName){
-            case "Spirit": return <img src={SpiritScalingIcon} style={{width:"42px", position:"relative", left:"-31px", top:"-5px"}}/>
-            case "Melee": return <img src={MeleeScalingIcon} style={{width:"36px", position:"relative", left:"-31px", top:"-3px"}}/>
-            case "Weapon": return <img src={WeaponScalingIcon} style={{width:"36px", position:"relative", left:"-31px", top:"-3px"}}/>
-            case "Health": return <img src={HealthScalingIcon} style={{width:"40px", position:"relative", left:"-31px", top:"-3px"}}/>
+            case "Spirit": return <img src={SpiritScalingIcon} style={{width:"30px", height:"30px", paddingRight:"3px", position:"relative", left:"12px", top:"-8px"}}/>
+            case "Melee": return <img src={MeleeScalingIcon} style={{width:"27px", height:"27px", paddingRight:"3px", position:"relative", left:"12px", top:"-6px"}}/>
+            case "Weapon": return <img src={WeaponScalingIcon} style={{width:"27px", height:"27px", paddingRight:"3px", position:"relative", left:"8px", top:"-6px"}}/>
+            case "Health": return <img src={HealthScalingIcon} style={{width:"27px", height:"27px", paddingRight:"3px", position:"relative", left:"12px", top:"-6px"}}/>
+            case "Boon": return <img src={BoonScalingIcon} style={{width:"27px", height:"27px", paddingRight:"3px", position:"relative", left:"12px", top:"-6px"}}/>
         }
         return ""
     }
 
-    static markdown(text, palette = null) {
+    static markdown(text, palette = null, customColor = null) {
         if (text == undefined || text == null || text == "") return {__html: ""}
 
         var bold = /\*\*(.*?)\*\*/gm;
@@ -117,9 +119,11 @@ class Utils{
             "#ff6b6b" : /\[(red),(.*?)\]/gm,
         }    
 
+        if (customColor == null || customColor == undefined) customColor = Utils.GetCurrentItemDict()["CustomColor"]
+
         var lightColor = "#ffffff"
-        var darkColor = ColorPalette.GetColor("DarkText", palette == null? null : palette, palette == "Custom"? Utils.GetCurrentItemDict()["CustomColor"] : null)
-        var subtitleColor = ColorPalette.GetColor("SubtitleText", palette == null? null : palette, palette == "Custom"? Utils.GetCurrentItemDict()["CustomColor"] : null)
+        var darkColor = ColorPalette.GetColor("DarkText", palette, customColor)
+        var subtitleColor = ColorPalette.GetColor("SubtitleText", palette, customColor)
         var symbols = /([&?=.@$%!^":;+/\-\\])/gm;
 
         var newtext = ""
